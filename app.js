@@ -56,7 +56,7 @@ app.post("/create",function(req,res){
 	var flag=0;
 
 	Code.find({name:codeno}, function(err, codes){
-		codes.forEach(function(c){
+		codes.forEach(function(err,c){
 			var x="/"+codeno;
 			flag=1;
 		    res.redirect(x);
@@ -74,8 +74,20 @@ app.get('/room', (req, res) => {
 });
 
 app.get('/:room', (req, res) => {
-	// console.log(req.params.room);
-	res.render('room', { roomId: req.params.room })
+	var searchcode=req.params.room;
+	var flag=0;
+
+	Code.find({name:searchcode}, function(err, codes){
+		codes.forEach(function(err,c){
+			// var x="/"+searchcode;
+			flag=1;
+		    res.render('room', { roomId: req.params.room })
+		});
+
+		if(flag===0){
+		res.render("error");
+		}
+	});	
 });
 
 
