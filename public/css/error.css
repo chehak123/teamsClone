@@ -1,0 +1,28 @@
+.page_404{ padding:40px 0; background:#fff; font-family: 'Arvo', sans-serif;
+}
+
+.page_404  img{ width:100%;}
+
+.page-404 button{
+    border-color: transparent;
+    border: none;
+}
+
+.four_zero_four_bg{
+ 
+ background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+    height: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+ }
+
+.contant_box_404{ margin-top:-50px;}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    color: whitesmoke;
+}
