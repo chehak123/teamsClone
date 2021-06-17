@@ -1,0 +1,34 @@
+.card{
+    border-color: transparent;
+    margin-right: 10px;
+}
+
+.create-team{
+    border-color: transparent;
+    background-color: #4e5d94;
+    box-shadow: 1px 1px 5px #888888;
+    border-radius: 2px;
+    height: 30px;
+    width: 150px;
+    padding-top: 2px;
+    padding-bottom: auto;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.create-team a{
+    text-decoration: none;
+    color: white;
+}
+
+.create-team:hover{
+    background-color: #404d7a;
+}
+
+.card:hover{
+background-color: rgb(236, 236, 236);
+}
+
+.card h5{
+    font-size: 18px;
+}
