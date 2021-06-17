@@ -32,3 +32,10 @@ background-color: rgb(236, 236, 236);
 .card h5{
     font-size: 18px;
 }
+
+.copy{
+    border-color: transparent;
+    border: transparent;
+    background-color:whitesmoke;
+    border-radius: 6px;
+}

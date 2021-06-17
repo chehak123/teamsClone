@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require("path");
 const ejs = require("ejs");
+var randomstring = require("randomstring");
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const { ExpressPeerServer } = require('peer');
@@ -28,7 +29,10 @@ app.get("/", function (req, res) {
 
 
 app.get("/create", function (req, res) {
-	res.render("create");
+	var newroom=randomstring.generate(7);
+	var newroomurl="/"+newroom;
+	// console.log(newroomurl);
+	res.render("create",{newroom:newroom, newroomurl:newroomurl});
 });
 
 app.post("/create",function(req,res){

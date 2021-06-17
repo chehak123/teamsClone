@@ -58,12 +58,10 @@
                   <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
                   <br>
                   <div class="text-center">
-                  <button class="btn btn-primary create-team" style="align-content: center;"><a href="/create" style="color: white; text-decoration: none;">Create Team</a></button>
+                  <button onclick="showroominfo()" class="btn btn-primary create-team" style="align-content: center;">Create Team</button>
                 </div>
                 </div>
               </div>
-              <!-- </div> -->
-
 
             <!-- <div class="col-lg-6 mb-4"> -->
                 <div class="card" style="width: 18rem;">
@@ -81,17 +79,50 @@
                             <button type="submit" class="btn btn-primary create-team" style="align-content: center;">Join Team</button>
                         </div>
                     </form>
-
                         <br>
-                       
 
                     </div>
                   </div>
               <!-- </div> -->
-
           </div>
+
+          <div id="roominfo" class="row" style="margin-top: 10px; margin-left: 1px; display: none;">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title text-center" style="margin-top: 10px;">Your team code is</h5><br>
+              <div style="display: flex;">
+                <h5 id="roomcode"><%=newroom%></h5> &nbsp;&nbsp;
+                <button class="copy" onclick="copytoclipboard('#roomcode')"><i class="fa fa-clone" aria-hidden="true"></i></button>
+              </div>
+
+              <small class="form-text text-muted">Copy the code and share it to the people you want to meet with</small>
+               <br><br>
+              <div class="text-center">
+              <button class="btn btn-primary create-team" style="align-content: center;"><a href=""+<%=newroomurl%>+"">Join</a></button>
+            </div>
+            </div>
+          </div>
+          </div>
+        
         </div>
     </div>
+
+    <script>
+
+      function showroominfo() {
+        document.getElementById("roominfo").style.display = "block";
+      }
+
+      function copytoclipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        alert("code copied to clipboard");
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
+
+    </script>
 
     <!-- JQuery JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous"></script>
