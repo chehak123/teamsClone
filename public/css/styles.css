@@ -3,6 +3,11 @@
 	padding: 0;
 	user-select: none;
 }
+
+button:hover, button:focus{
+outline:none
+}
+
 #videoGrid {
 	display: flex;
 	justify-content: center;
@@ -59,9 +64,10 @@ video {
 	font-weight: 500;
 }
 
-.mainControlsButton button{
+.mainControlsBlock button {
 	background-color: transparent;
 	border: none;
+	color: white;
 	border-color: transparent;
 }
 
