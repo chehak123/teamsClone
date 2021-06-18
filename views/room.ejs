@@ -21,7 +21,7 @@
 <body>
 
   <div class="main">
-    <div class="mainLeft">
+    <div class="mainLeft" id="mainLeft">
       <div class="mainVideos">
         <div id="videoGrid"> </div>
 
@@ -48,7 +48,7 @@
             <span>Participants</span>
          </div>
          <div class="mainControlsButton">
-            <i class="fas fa-comment-alt"></i>
+              <button onclick="showchatbox()"><i class="fas fa-comment-alt icon"></i></button>
             <span>Chat</span>
          </div>
          <div class="mainControlsButton">
@@ -66,9 +66,12 @@
       </div>
 
     </div>
-    <div class="mainRight">
+    <div class="mainRight" id="mainRight">
       <div class="mainHeader">
+        <div class="flex text-center" style="display:flex; margin-left: auto; margin-right: auto;">
         <h6>Chat</h6>
+         <button onclick="closechatbox()"><i class="fas fa-times"></i></button>
+         </div>
       </div>
       <div class="mainChatWindow">
         <ul class="messagesContainer">
@@ -78,10 +81,21 @@
      <div class="mainMessageContainer">
         <input id="chatMessage" type="text" placeholder="Type message here...">
      </div>
-    
     </div>
 </div>
 </body>
+
+<script>
+function closechatbox() {
+  document.getElementById("mainRight").style.display = "none";
+  document.getElementById("mainLeft").style.flex = "1";
+}
+
+function showchatbox() {
+  document.getElementById("mainRight").style.display = "flex";
+  document.getElementById("mainLeft").style.flex = "0.8";
+}
+</script>
 
 <script src="js/main.js"></script>
 

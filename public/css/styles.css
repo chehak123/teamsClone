@@ -59,6 +59,16 @@ video {
 	font-weight: 500;
 }
 
+.mainControlsButton button{
+	background-color: transparent;
+	border: none;
+	border-color: transparent;
+}
+
+.icon{
+	color:white;
+}
+
 .mainControlsButton svg {
 	font-size: 19px;
 	margin-bottom: 4px;
@@ -94,12 +104,22 @@ video {
 }
 
 .mainRight {
+	/* display: none; */
 	padding: 22px 18px;
 	flex: 0.2;
 	display: flex;
 	flex-direction: column;
 	background-color: #ffffff;
 	border-left: 1px solid #2d3d42;
+}
+
+.mainRight button{
+	background-color: transparent;
+	border-color: transparent;
+	border: none;
+	align-items: flex-end;
+	margin-left:220px;
+	font-size: 25px;
 }
 
 .mainHeader {

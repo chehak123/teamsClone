@@ -1,0 +1,20 @@
+Features added-
+
+1. video call
+2. voice and video turn off/on
+3. redirect unknown team codes to error page
+4. database for codes
+
+
+TO BE ADDED -
+1. rooms UI
+2. grid system for multiple users
+3. participants list
+4. Toggle chat button
+5. Google auth - sign in (Dashboard)
+6. Record meet
+7. User name on their video
+8. mic on/off display on video
+9. Host permission to join the rooms
+10. Waiting lobby
+11. screen presenting
