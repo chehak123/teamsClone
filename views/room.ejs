@@ -44,7 +44,7 @@
             <span>Security</span>
          </div>
          <div class="mainControlsButton">
-            <i class="fas fa-user-friends"></i>
+          <button onclick="showparticipants()"><i class="fas fa-user-friends icon"></i></button>
             <span>Participants</span>
          </div>
          <div class="mainControlsButton">
@@ -82,6 +82,16 @@
         <input id="chatMessage" type="text" placeholder="Type message here...">
      </div>
     </div>
+
+    <div class="mainRight" id="mainRightpart" style="display: none;">
+      <div class="mainHeader">
+        <div class="flex text-center" style="display:flex; margin-left: auto; margin-right: auto;">
+        <h6>Participants</h6>
+         <button onclick="closeparticipants()"><i class="fas fa-times"></i></button>
+         </div>
+      </div>
+      
+    </div>
 </div>
 </body>
 
@@ -89,12 +99,28 @@
 function closechatbox() {
   document.getElementById("mainRight").style.display = "none";
   document.getElementById("mainLeft").style.flex = "1";
+  document.getElementById("mainRightpart").style.display = "none";
 }
 
 function showchatbox() {
   document.getElementById("mainRight").style.display = "flex";
   document.getElementById("mainLeft").style.flex = "0.8";
+  document.getElementById("mainRightpart").style.display = "none";
 }
+
+function showparticipants() {
+  document.getElementById("mainRightpart").style.display = "flex";
+  document.getElementById("mainLeft").style.flex = "0.8";
+  document.getElementById("mainRight").style.display = "none";
+}
+
+function closeparticipants() {
+  document.getElementById("mainRightpart").style.display = "none";
+  document.getElementById("mainLeft").style.flex = "1";
+  document.getElementById("mainRight").style.display = "none";
+}
+
+
 </script>
 
 <script src="js/main.js"></script>
