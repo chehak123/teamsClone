@@ -23,6 +23,28 @@ mongoose.connect("mongodb+srv://chehak:123@cluster0.ohkb1.mongodb.net/Teams" , {
 });
 
 var Code = require("./db/models/code");
+var User = require("./db/models/user");
+var passport = require("passport");
+var localStrategy = require("passport-local"),
+  methodOverride = require("method-override");
+app.use(
+  require("express-session")({
+    secret: "This is the decryption key",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(methodOverride("_method"));
+app.use(passport.initialize()); //use to use passport in our code
+app.use(passport.session());
+
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+var authRoutes = require("./routes/auth.js");
+app.use("/", authRoutes);
 
 const { v4: uuidv4 } = require('uuid')
 var codeno;
@@ -30,6 +52,8 @@ var codeno;
 app.use('/peerjs', peerServer)
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
+
+var userId;
 
 app.get("/", function (req, res) {
 	res.render("index");
@@ -47,8 +71,9 @@ app.get("/create", function (req, res) {
 	});
 
 	code.save();
+	userId=req.user.name;
 
-	res.render("create",{newroom:newroom, newroomurl:newroomurl});
+	res.render("create",{newroom:newroom, newroomurl:newroomurl, currentUser: req.user});
 });
 
 app.post("/create",function(req,res){
@@ -79,9 +104,10 @@ app.get('/:room', (req, res) => {
 
 	Code.find({name:searchcode}, function(err, codes){
 		codes.forEach(function(err,c){
+			// console.log(req.user.name);
 			// var x="/"+searchcode;
 			flag=1;
-		    res.render('room', { roomId: req.params.room })
+		    res.render('room', { roomId: req.params.room, userId: req.user.name })
 		});
 
 		if(flag===0){
@@ -92,7 +118,10 @@ app.get('/:room', (req, res) => {
 
 
 io.on('connection', (socket) => {
-	socket.on('join-room', (roomId, userId) => {
+	// console.log(userId);
+	socket.on('join-room', (roomId) => {
+			console.log(userId);
+
 		socket.join(roomId)
 		socket.to(roomId).broadcast.emit('user-connected', userId)
 
@@ -102,6 +131,7 @@ io.on('connection', (socket) => {
 		socket.on('disconnect', () => {
 			socket.to(roomId).broadcast.emit('user-disconnected', userId)
 		})
+		
 	})
 })
 

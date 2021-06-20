@@ -1,0 +1,36 @@
+<head>
+    <link rel="stylesheet" href="css/c-styles.css">
+  </head>
+  <body>
+  <div class="html-container">
+      <div id="modal" class="modal-container">
+        <div class="form-box">
+          <div class="close-btn"><i class="far fa-times-circle"></i></div>
+          <div class="button-wrapper" id="_btn">
+            <div id="btn"></div>
+            <button type="button" class="toggle-btn active-modal" id="loginchange" onclick="login()">
+              Login
+            </button>
+            <button type="button" class="toggle-btn" id="change" onclick="signup()">
+              Signup
+            </button>
+          </div>
+    
+          <form id="login" action="/login" method="POST" class="input-container">
+            <input id="log_username" type="text" class="input-field" name="username" placeholder="Email ID" style="padding-left: 10px;" required />
+            <input id="log_password" type="password" class="input-field" name="password" placeholder="Password" style="padding-left: 10px;" required />
+    
+            <button type="submit" class="submit-btn" method="POST" style="margin-top: 10%;">Login</button>
+          </form>
+    
+          <form id="signup" action="/register" method="POST" class="input-container">
+            <input type="text" name="name" id="name_id" class="input-field" placeholder="Full Name" style="padding-left: 10px;" required />
+            <input id="username" name="username" type="email" class="input-field" placeholder="Email ID" style="padding-left: 10px;" required />
+            <input type="password" id="password" name="password" class="input-field" placeholder="Password" style="padding-left: 10px;" required />
+    
+            <button type="submit" class="submit-btn" style="margin-top: 10%;">Signup</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>

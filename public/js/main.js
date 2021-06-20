@@ -1,15 +1,19 @@
 const socket = io('/')
 const videoGrid = document.getElementById('videoGrid')
 const myVideo = document.createElement('video')
+// var userId=document.getElementById('person_name').innerHTML;
 myVideo.muted = true
 
 var peer = new Peer()
 
-const myPeer = new Peer(undefined, {
-	path: '/peerjs',
-	host: '/',
-	port: '5000',
-})
+// const myPeer = new Peer(undefined, {
+// 	path: '/peerjs',
+// 	host: '/',
+// 	port: '5000',
+// })
+
+var user = document.getElementById('person_name').innerHTML;
+
 
 const peers = {}
 let myVideoStream
@@ -24,7 +28,12 @@ navigator.mediaDevices
 
 		socket.on('user-connected', (userId) => {
 			connectToNewUser(userId, stream)
-			alert('Somebody connected', userId)
+			alert(userId+' connected')
+
+			// $('.members').append(`<li >
+			// 	${userId}
+			// 	</li>`)
+			// scrollToBottom()
 		})
 
 		peer.on('call', (call) => {
@@ -46,24 +55,25 @@ navigator.mediaDevices
 
 		socket.on('createMessage', (message, userId) => {
 			$('ul').append(`<li >
-								<span class="messageHeader">
-									<span>
-										From 
-										<span class="messageSender">Someone</span> 
-										to 
-										<span class="messageReceiver">Everyone:</span>
-									</span>
+				<span class="messageHeader">
+					<span>
+					From 
+					<span class="messageSender">${userId}</span> 
+						to' 
+										
+				    <span class="messageReceiver">Everyone:</span>
+					</span>
 
-									${new Date().toLocaleString('en-US', {
-										hour: 'numeric',
-										minute: 'numeric',
-										hour12: true,
-									})}
-								</span>
+					${new Date().toLocaleString('en-US', {
+						hour: 'numeric',
+						minute: 'numeric',
+						hour12: true,
+					})}
+				</span>
 
-								<span class="message">${message}</span>
+				<span class="message">${message}</span>
 							
-							</li>`)
+				</li>`)
 			scrollToBottom()
 		})
 	})
@@ -86,7 +96,7 @@ const connectToNewUser = (userId, stream) => {
 		video.remove()
 	})
 
-	peers[userId] = call
+	peers[user] = call
 }
 
 const addVideoStream = (video, stream) => {

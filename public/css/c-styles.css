@@ -1,0 +1,43 @@
+.txt-input {
+    margin: 12% 5% auto 5%;
+}
+
+.emt-btn {
+    margin-top: 2%;
+    float: right;
+    background-color: #5DB274;
+}
+
+.emt-btn:hover,.emt-btn:focus,.emt-btn:active {
+    background-color: #298742;
+}
+
+@media screen and (max-width: 700px) {
+    .txt-input {
+        margin-top: 30%;
+    }
+}
+
+.dum {
+    margin-top: 13%;
+    text-align: center;
+    color: #0f5321;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 1000px) {
+    .dum {
+        margin-top: 20%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .dum {
+        margin-top: 30%;
+    }
+}
+
+
+.convo-btn {
+    display: none;
+}
