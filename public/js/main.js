@@ -49,7 +49,7 @@ navigator.mediaDevices
 								<span class="messageHeader">
 									<span>
 										From 
-										<span class="messageSender">Someone</span> 
+										<span class="messageSender">${userId}</span> 
 										to 
 										<span class="messageReceiver">Everyone:</span>
 									</span>

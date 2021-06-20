@@ -9,13 +9,16 @@ outline:none
 }
 
 #videoGrid {
-	display: flex;
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-column-gap: 20px;
+	grid-row-gap:20px;
 	justify-content: center;
 }
 
 video {
-	height: 300px;
-	width: 400px;
+	height: 200px;
+	width: 300px;
 	object-fit: cover;
 }
 
