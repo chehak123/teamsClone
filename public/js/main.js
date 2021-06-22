@@ -11,7 +11,49 @@ const myPeer = new Peer(undefined, {
 	port: '5000',
 })
 
+const startpresent=document.getElementById("start");
+const stoppresent=document.getElementById("stop");
+const videoelement=document.getElementById("video");
+
+var displayMediaOptions={
+  video:{
+    cursor:'always'
+  },
+  audio:false
+}
+
+startpresent.addEventListener("click",function(e){
+  startCapture();
+},false)
+
+stoppresent.addEventListener("click",function(e){
+  stopCapture();
+},false)
+
+async function startCapture(){
+  try{
+    videoelement.srcObject=await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+	videoelement.append(await navigator.mediaDevices.getDisplayMedia(displayMediaOptions));
+	// connectToNewUser(userId,videoelement.srcObject);
+	// addVideoStream(videoelement,stream);
+  }catch(err){
+    console.error("Error"+err);
+  }
+}
+
+
+function stopCapture(e){
+let tracks=videoele.srcObject.getTracks()
+tracks.forEach(track=>track.stop()) 
+  
+videoele.srcObject=null
+}
+
+
+// let username=prompt("Please enter your name", "");
+
 const peers = {}
+const names={}
 let myVideoStream
 navigator.mediaDevices
 	.getUserMedia({
@@ -23,6 +65,11 @@ navigator.mediaDevices
 		addVideoStream(myVideo, stream)
 
 		socket.on('user-connected', (userId) => {
+			connection.getAllParticipants().forEach(function(participantId) {
+				var user = connection.peers[participantId];
+				var hisFullName = user.extra.fullName;
+				console.log(hisFullName);
+			});
 			connectToNewUser(userId, stream)
 			alert('Somebody connected', userId)
 		})
@@ -49,7 +96,7 @@ navigator.mediaDevices
 								<span class="messageHeader">
 									<span>
 										From 
-										<span class="messageSender">${userId}</span> 
+										<span class="messageSender">${names[userId]}</span> 
 										to 
 										<span class="messageReceiver">Everyone:</span>
 									</span>
@@ -87,6 +134,7 @@ const connectToNewUser = (userId, stream) => {
 	})
 
 	peers[userId] = call
+	names[userId]=username
 }
 
 const addVideoStream = (video, stream) => {
@@ -156,3 +204,5 @@ const setPlayVideo = () => {
 	`
 	document.querySelector('.mainVideoButton').innerHTML = html
 }
+
+
