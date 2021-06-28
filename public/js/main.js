@@ -4,6 +4,7 @@ const myVideo = document.createElement('video')
 myVideo.muted = true
 
 var peer = new Peer()
+var mymap=new Map();
 
 const myPeer = new Peer(undefined, {
 	path: '/peerjs',
@@ -22,7 +23,8 @@ navigator.mediaDevices
 		myVideoStream = stream
 		addVideoStream(myVideo, stream)
 
-		socket.on('user-connected', (userId) => {
+		socket.on('user-connected', (userId,username) => {
+			mymap.set(userId,username);
 			connectToNewUser(userId, stream)
 			alert('Somebody connected', userId)
 		})
@@ -45,11 +47,12 @@ navigator.mediaDevices
 		})
 
 		socket.on('createMessage', (message, userId) => {
+			var nameofuser= mymap.get(userId); 
 			$('ul').append(`<li >
 								<span class="messageHeader">
 									<span>
 										From 
-										<span class="messageSender">${userId}</span> 
+										<span class="messageSender">${nameofuser}</span> 
 										to 
 										<span class="messageReceiver">Everyone:</span>
 									</span>

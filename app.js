@@ -53,7 +53,7 @@ app.use('/peerjs', peerServer)
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
 
-// var userId;
+var username;
 
 app.get("/", function (req, res) {
 	res.render("index");
@@ -71,7 +71,7 @@ app.get("/create", function (req, res) {
 	});
 
 	code.save();
-	// userId=req.user.name;/
+	username=req.user.name;
 
 	res.render("create",{newroom:newroom, newroomurl:newroomurl, currentUser: req.user});
 });
@@ -120,7 +120,7 @@ app.get('/:room', (req, res) => {
 io.on('connection', (socket) => {
 	socket.on('join-room', (roomId, userId) => {
 		socket.join(roomId)
-		socket.to(roomId).broadcast.emit('user-connected', userId)
+		socket.to(roomId).broadcast.emit('user-connected', userId,username)
 
 		socket.on('message', (message) => {
 			io.to(roomId).emit('createMessage', message, userId)
