@@ -23,9 +23,7 @@
   <div class="main">
     <div class="mainLeft" id="mainLeft">
       <div class="mainVideos">
-        <div id="videoGrid"> 
-          <video id="video" autoplay></video>
-        </div>
+        <div id="videoGrid"> </div>
 
       </div>
       <div class="mainControls">
@@ -46,7 +44,7 @@
             <span>Security</span>
          </div>
 
-         <button onclick="showparticipants()" id="part">
+         <button onclick="showparticipants()">
          <div class="mainControlsButton">
           <i class="fas fa-user-friends icon"></i>
             <span>Participants</span>
@@ -60,20 +58,10 @@
          </div>
         </button>
 
-        <button id="start">
          <div class="mainControlsButton">
           <i class="fas fa-record-vinyl"></i>         
           <span>Record</span>
        </div>
-       </button>
-
-       <button id="stop">
-        <div class="mainControlsButton">
-         <i class="fas fa-record-vinyl"></i>         
-         <span>Stop Record</span>
-      </div>
-      </button>
-
         </div>
 
         <div class="mainControlsBlock">
@@ -127,11 +115,11 @@ function showchatbox() {
   document.getElementById("mainRightpart").style.display = "none";
 }
 
-// function showparticipants() {
-//   document.getElementById("mainRightpart").style.display = "flex";
-//   document.getElementById("mainLeft").style.flex = "0.8";
-//   document.getElementById("mainRight").style.display = "none";
-// }
+function showparticipants() {
+  document.getElementById("mainRightpart").style.display = "flex";
+  document.getElementById("mainLeft").style.flex = "0.8";
+  document.getElementById("mainRight").style.display = "none";
+}
 
 function closeparticipants() {
   document.getElementById("mainRightpart").style.display = "none";
@@ -139,49 +127,8 @@ function closeparticipants() {
   document.getElementById("mainRight").style.display = "none";
 }
 
-const start=document.getElementById("start");
-const stop=document.getElementById("stop");
-const videoele=document.getElementById("video");
-
-// var displayMediaOptions={
-//   video:{
-//     cursor:'always'
-//   },
-//   audio:false
-// }
-
-// start.addEventListener("click",function(e){
-//   startCapture();
-//   // videoGrid.append(videoele)
-// },false)
-
-// stop.addEventListener("click",function(e){
-//   stopCapture();
-// },false)
-
-// async function startCapture(){
-//   try{
-//     videoele.srcObject=await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-//   //   videoele.srcObject = stream
-// 	//   videoele.addEventListener('loadedmetadata', () => {
-// 	// 	videoele.play()
-// 	// })
-//   //   videoGrid.append(videoele);
-//   }catch(err){
-//     console.error("Error"+err);
-//   }
-// }
-
-// function stopCapture(e){
-// let tracks=videoele.srcObject.getTracks()
-// tracks.forEach(track=>track.stop()) 
-  
-// videoele.srcObject=null
-// }
 
 </script>
-<script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
-<script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
 
 <script src="js/main.js"></script>
 
