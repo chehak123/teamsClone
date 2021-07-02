@@ -85,9 +85,12 @@
         </ul>
      </div>
      <div class="messageSendingTo">To: <span>Everyone <i class="fas fa-angle-down"></i></span> </div>
-     <div class="mainMessageContainer">
-        <input id="chatMessage" type="text" placeholder="Type message here...">
-     </div>
+     <div class="mainMessageContainer"> 
+       <span>
+      <input id="chatMessage" type="text" placeholder="Type message here..." style="background-color:whitesmoke; padding: 8px;">
+          <button id="start-btn" onclick=startlistening() style="font-size: small">Listen</button>
+     </span>
+        </div>
     </div>
 
     <div class="mainRight" id="mainRightpart" style="display: none;">
@@ -126,6 +129,48 @@ function closeparticipants() {
   document.getElementById("mainLeft").style.flex = "1";
   document.getElementById("mainRight").style.display = "none";
 }
+
+var speechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition
+var recognition=new speechRecognition()
+var textbox=$("#chatMessage")
+// var instructions=$("#instructions")/
+var play=document.getElementById("start-btn")
+var playbutton=$("#start-btn")
+var content=''
+recognition.continuous=true
+
+//recognition is started
+
+function startlistening(){
+if(play.innerHTML==="Listen"){
+  // console.log("hi");
+recognition.onstart=function(){
+    // instructions.text("Voice recogntion is on")
+  playbutton.text("Stop Listening")
+}
+}else{
+  recognition.stop();
+  playbutton.text("Listen")
+}
+}
+
+recognition.onspeechend=function(){
+    // instructions.text("Press above button to convert your speech to text.")
+    playbutton.text("Listen")
+}
+recognition.onresult=function(event){
+    var current=event.resultIndex;
+    var transcript=event.results[current][0].transcript
+    content+=transcript
+    textbox.val(content)
+}
+$("#start-btn").click(function(event){
+    if(content.length){
+        content+=''
+    }
+    recognition.start()
+})
+
 
 
 </script>
