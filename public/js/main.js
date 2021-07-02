@@ -1,6 +1,7 @@
 const socket = io('/')
 const videoGrid = document.getElementById('videoGrid')
 const myVideo = document.createElement('video')
+
 myVideo.muted = true
 
 var peer = new Peer()
@@ -46,7 +47,7 @@ navigator.mediaDevices
 			}
 		})
 
-		socket.on('createMessage', (message, userId) => {
+		socket.on('createMessage', (message, userId, username) => {
 			var nameofuser= mymap.get(userId); 
 			$('ul').append(`<li >
 								<span class="messageHeader">
@@ -69,10 +70,11 @@ navigator.mediaDevices
 							</li>`)
 			scrollToBottom()
 		})
+
 	})
 
 socket.on('user-disconnected', (userId) => {
-	if (peers[userId]) peers[userId].close()
+	peers[userId].close()
 })
 
 peer.on('open', (id) => {

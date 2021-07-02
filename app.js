@@ -123,7 +123,8 @@ io.on('connection', (socket) => {
 		socket.to(roomId).broadcast.emit('user-connected', userId,username)
 
 		socket.on('message', (message) => {
-			io.to(roomId).emit('createMessage', message, userId)
+			var u;
+			io.to(roomId).emit('createMessage', message, userId, u)
 		})
 		socket.on('disconnect', () => {
 			socket.to(roomId).broadcast.emit('user-disconnected', userId)
