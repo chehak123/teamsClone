@@ -1,6 +1,7 @@
 const socket = io('/')
 const videoGrid = document.getElementById('videoGrid')
 const myVideo = document.createElement('video')
+// const Participants_list=document.getElementById('Participants_list')
 
 myVideo.muted = true
 
@@ -11,6 +12,8 @@ const myPeer = new Peer(undefined, {
 	host: '/',
 	port: '5000',
 })
+
+var usern;
 
 const peers = {}
 let myVideoStream
@@ -23,11 +26,16 @@ navigator.mediaDevices
 		myVideoStream = stream
 		addVideoStream(myVideo, stream)
 
-		socket.on('user-connected', (userId) => {
-			// mymap.set(userId,username);
-			// console.log(mymap.get(userId));
+		socket.on('user-connected', (userId,username,users) => {
+			
+            //  users.forEach(function(err,c){
+			// 	//  console.log(users[c]);
+			// 	$("#Participants_list").append(`<li><h6>${users[c]}</h6></li>`)
+			//  });
+
+			// usern=username;
 			connectToNewUser(userId, stream)
-			alert('Somebody connected', userId)
+			alert(username + ' connected', userId)
 		})
 
 		peer.on('call', (call) => {
@@ -99,6 +107,9 @@ const addVideoStream = (video, stream) => {
 		video.play()
 	})
 	videoGrid.append(video)
+	// if(usern!="undefined"){
+	// $("#Participants_list").append(`<li><h6>${usern}</h6></li>`)
+	// }
 }
 
 const scrollToBottom = () => {

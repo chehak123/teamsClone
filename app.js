@@ -24,7 +24,7 @@ mongoose.connect("mongodb+srv://chehak:123@cluster0.ohkb1.mongodb.net/Teams" , {
 
 var Code = require("./db/models/code");
 var User = require("./db/models/user");
-var Fruit = require("./db/models/fruit");
+var Usercode = require("./db/models/usercode");
 var passport = require("passport");
 var localStrategy = require("passport-local"),
   methodOverride = require("method-override");
@@ -68,7 +68,8 @@ app.get("/create", function (req, res) {
 	var newroom=randomstring.generate(7);
 	var newroomurl="/"+newroom;
 	const code=new Code({
-		name:newroom
+		name:newroom,
+		host : req.user.username
 	});
 
 	code.save();
@@ -83,6 +84,24 @@ app.post("/create",function(req,res){
 
 	Code.find({name:codeno}, function(err, codes){
 		codes.forEach(function(err,c){
+			var hostperson= codes[c].host;
+            
+			// function sendEmail() {
+				// Email.send({
+				//   Host: "smtp.gmail.com",
+				//   Username: "chehakagrawal01@gmail.com",
+				//   Password: "Enter your password",
+				//   To: hostperson,
+				//   From: req.user.username,
+				//   Subject: req.user.name + " wants to join your call",
+				//   Body: "Well that was easy!!",
+				// })
+				//   .then(function (message) {
+				// 	alert("mail sent successfully")
+				//   });
+			//   }
+
+			// prompt("You are joining the call of " + hostperson);
 			var x="/"+codeno;
 			flag=1;
 		    res.redirect(x);
@@ -120,27 +139,37 @@ app.get('/:room', (req, res) => {
 
 io.on('connection', (socket) => {
 	var mymap=new Map();
-	// mymap.set('hi', 'geeksforgeeks');
 	socket.on('join-room', (roomId, userId) => {
 		socket.join(roomId)
-		socket.to(roomId).broadcast.emit('user-connected', userId)
-		// console.log(username);
+       const users = [];
+        
+	   var i=0;
+	   Usercode.find({roomid:roomId},function(err,usercodes){
+		usercodes.forEach(function(err,c){
+			// users[i]=c.nameofuser;
+			users[i]=usercodes[c].nameofuser;
+			i++;
+		});
+		socket.to(roomId).broadcast.emit('user-connected', userId,username,users)
 
-		const fruit=new Fruit({
+		});
+
+		// socket.to(roomId).broadcast.emit('user-connected', userId,username,users)
+
+		const usercode=new Usercode({
 			nameofuser: username,
-			id:userId
+			id:userId,
+			roomid: roomId
 		});
 	
-		fruit.save();
+		usercode.save();
 
 		socket.on('message', (message) => {
 			var x;
 				
-			Fruit.find({id:userId},function(err,fruits){
-				x=fruits[0].nameofuser;
+			Usercode.find({id:userId},function(err,usercodes){
+				x=usercodes[0].nameofuser;
 				// console.log(x);
-
-			// console.log(x);
 			io.to(roomId).emit('createMessage', message, userId,x)
 			
 		});

@@ -6,15 +6,14 @@ Features added-
 4. database for codes
 5. toggle chat
 6. participants toggle
-
+grid system for multiple users
+5. Google auth - sign in (Dashboard)
 
 TO BE ADDED -
 1. rooms UI
-2. grid system for multiple users
 3. participants list
-5. Google auth - sign in (Dashboard)
 6. Record meet
-7. User name on their video
+7. User name on their videos
 8. mic on/off display on video
 9. Host permission to join the rooms
 10. Waiting lobby
