@@ -24,6 +24,7 @@ mongoose.connect("mongodb+srv://chehak:123@cluster0.ohkb1.mongodb.net/Teams" , {
 
 var Code = require("./db/models/code");
 var User = require("./db/models/user");
+var Fruit = require("./db/models/fruit");
 var passport = require("passport");
 var localStrategy = require("passport-local"),
   methodOverride = require("method-override");
@@ -104,7 +105,8 @@ app.get('/:room', (req, res) => {
 
 	Code.find({name:searchcode}, function(err, codes){
 		codes.forEach(function(err,c){
-			// console.log(req.user.name);
+			username=req.user.name;
+			// console.log(username);
 			// var x="/"+searchcode;
 			flag=1;
 		    res.render('room', { roomId: req.params.room, userId: req.user.name })
@@ -116,15 +118,32 @@ app.get('/:room', (req, res) => {
 	});	
 });
 
-
 io.on('connection', (socket) => {
+	var mymap=new Map();
+	// mymap.set('hi', 'geeksforgeeks');
 	socket.on('join-room', (roomId, userId) => {
 		socket.join(roomId)
-		socket.to(roomId).broadcast.emit('user-connected', userId,username)
+		socket.to(roomId).broadcast.emit('user-connected', userId)
+		// console.log(username);
+
+		const fruit=new Fruit({
+			nameofuser: username,
+			id:userId
+		});
+	
+		fruit.save();
 
 		socket.on('message', (message) => {
-			var u;
-			io.to(roomId).emit('createMessage', message, userId, u)
+			var x;
+				
+			Fruit.find({id:userId},function(err,fruits){
+				x=fruits[0].nameofuser;
+				// console.log(x);
+
+			// console.log(x);
+			io.to(roomId).emit('createMessage', message, userId,x)
+			
+		});
 		})
 		socket.on('disconnect', () => {
 			socket.to(roomId).broadcast.emit('user-disconnected', userId)

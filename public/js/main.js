@@ -5,7 +5,6 @@ const myVideo = document.createElement('video')
 myVideo.muted = true
 
 var peer = new Peer()
-var mymap=new Map();
 
 const myPeer = new Peer(undefined, {
 	path: '/peerjs',
@@ -24,8 +23,9 @@ navigator.mediaDevices
 		myVideoStream = stream
 		addVideoStream(myVideo, stream)
 
-		socket.on('user-connected', (userId,username) => {
-			mymap.set(userId,username);
+		socket.on('user-connected', (userId) => {
+			// mymap.set(userId,username);
+			// console.log(mymap.get(userId));
 			connectToNewUser(userId, stream)
 			alert('Somebody connected', userId)
 		})
@@ -47,13 +47,12 @@ navigator.mediaDevices
 			}
 		})
 
-		socket.on('createMessage', (message, userId, username) => {
-			var nameofuser= mymap.get(userId); 
+		socket.on('createMessage', (message, userId,x) => {
 			$('ul').append(`<li >
 								<span class="messageHeader">
 									<span>
 										From 
-										<span class="messageSender">${nameofuser}</span> 
+										<span class="messageSender">${x}</span> 
 										to 
 										<span class="messageReceiver">Everyone:</span>
 									</span>
@@ -135,7 +134,7 @@ const setUnmuteButton = () => {
 }
 
 const playStop = () => {
-	console.log('object')
+	// console.log('object')
 	let enabled = myVideoStream.getVideoTracks()[0].enabled
 	if (enabled) {
 		myVideoStream.getVideoTracks()[0].enabled = false
