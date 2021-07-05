@@ -1,3 +1,4 @@
+require("dotenv").config({ path: ".env" });
 const express = require('express');
 const app = express();
 const path = require("path");
@@ -119,13 +120,13 @@ app.post("/share", function(req,res){
 		var transporter = nodemailer.createTransport({
 				service: 'gmail',
 				auth: {
-				  user: 'chehakagrawal01@gmail.com',
-				  pass: 'chikugungun'
+				  user: process.env.MAIL,
+				  pass: process.env.PASS
 				}
 			  });
 			  
 			  var mailOptions = {
-				from: hostperson,
+				from: process.env.MAIL,
 				to: friendmail,
 				subject: 'Invite to join teams meet',
 				text: `Hi there, ${hostperson} has invited you to join the teams meet 

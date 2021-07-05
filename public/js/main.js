@@ -15,8 +15,85 @@ const myPeer = new Peer(undefined, {
 
 var usern;
 
+///screenshare/////////////////////////////////////////////////////////////////////////////
+const videoElem = document.getElementById("video");
+const startElem = document.getElementById("start");
+const stopElem = document.getElementById("stop");
+let myVideoStream;
+// Options for getDisplayMedia()
+
+var displayMediaOptions = {
+  video: {
+    cursor: "always"
+  },
+  audio: false
+};
+
+// Set event listeners for the start and stop buttons
+startElem.addEventListener("click", function(evt) {
+  startCapture();
+}, false);
+
+stopElem.addEventListener("click", function(evt) {
+  stopCapture();
+}, false);
+
+
+async function startCapture() {
+  // logElem.innerHTML = "";
+
+  try {
+    // videoElem.srcObject = await 
+	navigator.mediaDevices.getDisplayMedia(displayMediaOptions)
+	.then((stream)=>{
+		myVideoStream = stream
+		addVideoStream(myVideo, stream)
+        
+		var x="screen";
+		socket.on('user-connected', (userId,x,users) => {
+			console.log(userId);
+			connectToNewUser(userId, stream)
+			alert('screen connected', userId)
+		})
+
+		peer.on('call', (call) => {
+			call.answer(stream)
+			const video = document.createElement('video')
+			call.on('stream', (userVideoStream) => {
+				addVideoStream(video, userVideoStream)
+			})
+		})
+
+        // var name="screen";
+		// socket.on('user-connected', (userId,name,users) => {
+		// 	// usern=username;
+		// 	connectToNewUser(userId, stream)
+		// 	alert(username + ' connected', userId)
+		// });
+	});
+
+    dumpOptionsInfo();
+  } catch(err) {
+    console.error("Error: " + err);
+  }
+}
+
+function stopCapture(evt) {
+  let tracks = videoElem.srcObject.getTracks();
+
+  socket.on('user-disconnected', (userId) => {
+	peers[userId].close()
+})
+
+  tracks.forEach(track => track.stop());
+  videoElem.srcObject = null;
+}
+
+
+//screenshare ends//////////////////////////////////////////////////////////////////
+
+
 const peers = {}
-let myVideoStream
 navigator.mediaDevices
 	.getUserMedia({
 		video: true,
