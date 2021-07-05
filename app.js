@@ -8,6 +8,7 @@ const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const { ExpressPeerServer } = require('peer');
 var bodyParser = require("body-parser");
+var nodemailer=require('nodemailer');
 
 const peerServer = ExpressPeerServer(server, {
 	debug: true,
@@ -64,13 +65,25 @@ app.get("/error", function (req, res) {
 	res.render("error");
 });
 
+app.get("/share", function (req, res) {
+	res.render("share",{currentUser: req.user});
+});
+
+var hostperson;
+var teamcreated;
+
 app.get("/create", function (req, res) {
 	var newroom=randomstring.generate(7);
 	var newroomurl="/"+newroom;
+    var x=req.user.username;
+
 	const code=new Code({
 		name:newroom,
-		host : req.user.username
+		host:x
 	});
+
+	hostperson= req.user.name;
+	teamcreated=newroom;
 
 	code.save();
 	username=req.user.name;
@@ -83,29 +96,14 @@ app.post("/create",function(req,res){
 	var flag=0;
 
 	Code.find({name:codeno}, function(err, codes){
-		codes.forEach(function(err,c){
-			var hostperson= codes[c].host;
+		// codes.forEach(function(err,c){
+			 hostperson= codes[0].host;
+			 teamcreated=codeno;
             
-			// function sendEmail() {
-				// Email.send({
-				//   Host: "smtp.gmail.com",
-				//   Username: "chehakagrawal01@gmail.com",
-				//   Password: "Enter your password",
-				//   To: hostperson,
-				//   From: req.user.username,
-				//   Subject: req.user.name + " wants to join your call",
-				//   Body: "Well that was easy!!",
-				// })
-				//   .then(function (message) {
-				// 	alert("mail sent successfully")
-				//   });
-			//   }
-
-			// prompt("You are joining the call of " + hostperson);
 			var x="/"+codeno;
 			flag=1;
 		    res.redirect(x);
-		});
+		// });
 
 		if(flag===0){
 		res.redirect("/error");
@@ -113,6 +111,38 @@ app.post("/create",function(req,res){
 	});
 	
 });
+
+app.post("/share", function(req,res){
+	console.log(hostperson);
+	console.log(teamcreated);
+	var friendmail=req.body.friendmail;
+		var transporter = nodemailer.createTransport({
+				service: 'gmail',
+				auth: {
+				  user: 'chehakagrawal01@gmail.com',
+				  pass: 'chikugungun'
+				}
+			  });
+			  
+			  var mailOptions = {
+				from: hostperson,
+				to: friendmail,
+				subject: 'Invite to join teams meet',
+				text: `Hi there, ${hostperson} has invited you to join the teams meet 
+				Teams code - ${teamcreated}`
+			  };
+			  
+			  transporter.sendMail(mailOptions, function(error, info){
+				if (error) {
+				  console.log(error);
+				} else {
+				  console.log('Email sent: ' + info.response);
+				}
+			  });
+
+			  res.redirect("/share");
+
+})
 
 app.get('/room', (req, res) => {
 	res.redirect(`/${uuidv4()}`)
