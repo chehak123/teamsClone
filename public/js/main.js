@@ -1,3 +1,12 @@
+
+// /** @type {RTCConfiguration} */
+// const config = { // eslint-disable-line no-unused-vars
+// 	'iceServers': [{
+// 	  'urls': ['stun:stun.l.google.com:19302']
+// 	}]
+//   };
+
+
 const socket = io('/')
 const videoGrid = document.getElementById('videoGrid')
 const myVideo = document.createElement('video')
@@ -10,10 +19,20 @@ var peer = new Peer()
 const myPeer = new Peer(undefined, {
 	path: '/peerjs',
 	host: '/',
-	port: '5000',
+	port: '443',
 })
 
 var usern;
+
+// const iceServers = {
+// 	iceServers: [
+// 	  { urls: 'stun:stun.l.google.com:19302' },
+// 	  { urls: 'stun:stun1.l.google.com:19302' },
+// 	  { urls: 'stun:stun2.l.google.com:19302' },
+// 	  { urls: 'stun:stun3.l.google.com:19302' },
+// 	  { urls: 'stun:stun4.l.google.com:19302' },
+// 	],
+//   }
 
 ///screenshare/////////////////////////////////////////////////////////////////////////////
 const videoElem = document.getElementById("video");
