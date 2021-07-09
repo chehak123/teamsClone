@@ -10,6 +10,7 @@
 const socket = io('/')
 const videoGrid = document.getElementById('videoGrid')
 const myVideo = document.createElement('video')
+// const leave= document.getElementById("leave");
 // const Participants_list=document.getElementById('Participants_list')
 
 myVideo.muted = true
@@ -19,7 +20,7 @@ var peer = new Peer()
 const myPeer = new Peer(undefined, {
 	path: '/peerjs',
 	host: '/',
-	port: '443',
+	port: '3000',
 })
 
 var usern;
@@ -65,7 +66,8 @@ async function startCapture() {
     // videoElem.srcObject = await 
 	navigator.mediaDevices.getDisplayMedia(displayMediaOptions)
 	.then((stream)=>{
-		sender.replaceTrack(stream);
+        myVideoStream.getVideoTracks()[0].replaceTrack(stream);
+
 		// myVideoStream = stream
 		// addVideoStream(myVideo, stream)
         
@@ -100,10 +102,10 @@ async function startCapture() {
 
 function stopCapture(evt) {
   let tracks = videoElem.srcObject.getTracks();
-//   sender.replaceTrack()
-//   socket.on('user-disconnected', (userId) => {
-// 	peers[userId].close()
-// })
+
+  socket.on('user-disconnected', (userId) => {
+	peers[userId].close()
+})
 
   tracks.forEach(track => track.stop());
   videoElem.srcObject = null;
@@ -175,11 +177,20 @@ navigator.mediaDevices
 			scrollToBottom()
 		})
 
+		// socket.on('user-disconnected', (userId) => {
+		// 	peers[userId].remove()
+		// })
+
 	})
 
-socket.on('user-disconnected', (userId) => {
-	peers[userId].close()
-})
+
+	socket.on('user-disconnected', (userId) => {
+		peers[userId].close()
+	})
+
+	const leave = () => {
+			myVideoStream.getVideoTracks()[0].enabled = false;
+		}
 
 peer.on('open', (id) => {
 	socket.emit('join-room', ROOM_ID, id)
