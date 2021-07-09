@@ -46,23 +46,24 @@ async function startCapture() {
     // videoElem.srcObject = await 
 	navigator.mediaDevices.getDisplayMedia(displayMediaOptions)
 	.then((stream)=>{
-		myVideoStream = stream
-		addVideoStream(myVideo, stream)
+		sender.replaceTrack(stream);
+		// myVideoStream = stream
+		// addVideoStream(myVideo, stream)
         
-		var x="screen";
-		socket.on('user-connected', (userId,x,users) => {
-			console.log(userId);
-			connectToNewUser(userId, stream)
-			alert('screen connected', userId)
-		})
+		// var x="screen";
+		// socket.on('user-connected', (userId,x,users) => {
+		// 	console.log(userId);
+		// 	connectToNewUser(userId, stream)
+		// 	alert('screen connected', userId)
+		// })
 
-		peer.on('call', (call) => {
-			call.answer(stream)
-			const video = document.createElement('video')
-			call.on('stream', (userVideoStream) => {
-				addVideoStream(video, userVideoStream)
-			})
-		})
+		// peer.on('call', (call) => {
+		// 	call.answer(stream)
+		// 	const video = document.createElement('video')
+		// 	call.on('stream', (userVideoStream) => {
+		// 		addVideoStream(video, userVideoStream)
+		// 	})
+		// })
 
         // var name="screen";
 		// socket.on('user-connected', (userId,name,users) => {
@@ -80,10 +81,10 @@ async function startCapture() {
 
 function stopCapture(evt) {
   let tracks = videoElem.srcObject.getTracks();
-
-  socket.on('user-disconnected', (userId) => {
-	peers[userId].close()
-})
+//   sender.replaceTrack()
+//   socket.on('user-disconnected', (userId) => {
+// 	peers[userId].close()
+// })
 
   tracks.forEach(track => track.stop());
   videoElem.srcObject = null;

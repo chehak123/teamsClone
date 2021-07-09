@@ -16,7 +16,7 @@
     height: 480px;
     position: relative;
     margin: 8% auto;
-    background: #a8f57c;
+    background: #b3cde7;
     padding: 5px;
     overflow: hidden;
     border-radius: 20px;
@@ -42,7 +42,7 @@
     top: 0;
     right: 0;
     margin: 20px;
-    color: #79dc68;
+    color: #75ade6;
     font-size: 24px;
 }
 
@@ -66,7 +66,7 @@
 
 .active-modal {
     width: 110px;
-    background: #79dc68;
+    background: #7fa5ca;
     border-radius: 30px;
     transition: 0.3s;
     color: black;
@@ -88,7 +88,7 @@
     border-right: 0;
     border-bottom: 1px solid #999;
     outline: none;
-    color: #fff;
+    color: black;
     background: transparent;
 }
 
@@ -98,7 +98,7 @@
     cursor: pointer;
     display: block;
     margin: auto;
-    background: #79dc68;
+    background: #65a1dd;
     border: 0;
     outline: none;
     border-radius: 30px;
