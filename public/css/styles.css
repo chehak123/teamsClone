@@ -14,10 +14,12 @@ outline:none
 	grid-column-gap: 20px;
 	grid-row-gap:20px;
 	justify-content: center;
+	position:absolute;
 }
 
 video {
 	height: 200px;
+	/* position: absolute; */
 	width: 300px;
 	object-fit: cover;
 }

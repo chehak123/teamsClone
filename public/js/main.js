@@ -279,3 +279,4 @@ const setPlayVideo = () => {
 	`
 	document.querySelector('.mainVideoButton').innerHTML = html
 }
+
