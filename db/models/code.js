@@ -6,7 +6,12 @@ var codeSchema=new mongoose.Schema({
     },
     host:{
         type:String
-    }
+    },
+    messages:[{
+       username:{type: String},
+       chat:{type:String}
+       
+    }]
 
 });
 module.exports=mongoose.model("code",codeSchema);

@@ -11,7 +11,10 @@ var userSchema=new mongoose.Schema({
 	password:{
         type:String
         //required:true
-    }
+    },
+    rooms:[{
+        type:String
+    }]
 });
 userSchema.plugin(passportLocal);
 module.exports=mongoose.model("User",userSchema);

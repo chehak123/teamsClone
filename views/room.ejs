@@ -99,6 +99,21 @@
       </div>
       <div class="mainChatWindow">
         <ul class="messagesContainer">
+          <% groupmess.forEach(function(skill){%>
+            <li >
+              <span class="messageHeader">
+                <span>
+                  From 
+                  <span class="messageSender"><%= skill.username%></span> 
+                  to 
+                  <span class="messageReceiver">Everyone:</span>
+                </span>
+              </span>
+
+              <span class="message"><%=skill.chat %></span>
+            
+            </li>   
+            <%}) %>     
         </ul>
      </div>
      <div class="messageSendingTo">To: <span>Everyone <i class="fas fa-angle-down"></i></span> </div>
@@ -123,64 +138,50 @@
 </div>
 </body>
 <script>
-
 // $("#chatMessage").emojioneArea({
 //     pickerPosition:"top"
 //   });
-
 function closechatbox() {
   document.getElementById("mainRight").style.display = "none";
   document.getElementById("mainLeft").style.flex = "1";
   document.getElementById("mainRightpart").style.display = "none";
 }
-
 function showchatbox() {
   document.getElementById("mainRight").style.display = "flex";
   document.getElementById("mainLeft").style.flex = "0.8";
   document.getElementById("mainRightpart").style.display = "none";
 }
-
 function showparticipants() {
   document.getElementById("mainRightpart").style.display = "flex";
   document.getElementById("mainLeft").style.flex = "0.8";
   document.getElementById("mainRight").style.display = "none";
 }
-
 function closeparticipants() {
   document.getElementById("mainRightpart").style.display = "none";
   document.getElementById("mainLeft").style.flex = "1";
   document.getElementById("mainRight").style.display = "none";
 }
-
 ///screen share
-
 // const videoElem = document.getElementById("video");
 // // const logElem = document.getElementById("log");
 // const startElem = document.getElementById("start");
 // const stopElem = document.getElementById("stop");
-
 // // Options for getDisplayMedia()
-
 // var displayMediaOptions = {
 //   video: {
 //     cursor: "always"
 //   },
 //   audio: false
 // };
-
 // // Set event listeners for the start and stop buttons
 // startElem.addEventListener("click", function(evt) {
 //   startCapture();
 // }, false);
-
 // stopElem.addEventListener("click", function(evt) {
 //   stopCapture();
 // }, false);
-
-
 // async function startCapture() {
 //   // logElem.innerHTML = "";
-
 //   try {
 //     videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
 //     dumpOptionsInfo();
@@ -188,18 +189,13 @@ function closeparticipants() {
 //     console.error("Error: " + err);
 //   }
 // }
-
 // function stopCapture(evt) {
 //   let tracks = videoElem.srcObject.getTracks();
-
 //   tracks.forEach(track => track.stop());
 //   videoElem.srcObject = null;
 // }
-
 //draggable//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 dragElement(document.getElementById("videoGrid"));
-
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (document.getElementById(elmnt.id + "header")) {
@@ -209,7 +205,6 @@ function dragElement(elmnt) {
     // otherwise, move the DIV from anywhere inside the DIV:
     elmnt.onmousedown = dragMouseDown;
   }
-
   function dragMouseDown(e) {
     e = e || window.event;
     e.preventDefault();
@@ -220,7 +215,6 @@ function dragElement(elmnt) {
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
   }
-
   function elementDrag(e) {
     e = e || window.event;
     e.preventDefault();
@@ -233,17 +227,13 @@ function dragElement(elmnt) {
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
   }
-
   function closeDragElement() {
     // stop moving when mouse button is released:
     document.onmouseup = null;
     document.onmousemove = null;
   }
 }
-
-
 //speech to text//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 var speechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition
 var recognition=new speechRecognition()
 var textbox=$("#chatMessage")
@@ -252,9 +242,7 @@ var play=document.getElementById("start-btn")
 var playbutton=$("#start-btn")
 var content=''
 recognition.continuous=true
-
 //recognition is started
-
 function startlistening(){
 if(play.innerHTML==="Listen"){
   // console.log("hi");
@@ -267,7 +255,6 @@ recognition.onstart=function(){
   playbutton.text("Listen")
 }
 }
-
 recognition.onspeechend=function(){
     // instructions.text("Press above button to convert your speech to text.")
     playbutton.text("Listen")
@@ -284,7 +271,6 @@ $("#start-btn").click(function(event){
     }
     recognition.start()
 })
-
 //emoji
 </script>
 

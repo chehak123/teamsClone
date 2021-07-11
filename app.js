@@ -89,6 +89,11 @@ app.get("/create", function (req, res) {
 	code.save();
 	username=req.user.name;
 
+	User.findOne({ name: hostperson}, function (err, users){
+		users.rooms.push(newroom);
+		users.save();
+	});
+
 	res.render("create",{newroom:newroom, newroomurl:newroomurl, currentUser: req.user});
 });
 
@@ -98,11 +103,19 @@ app.post("/create",function(req,res){
 
 	Code.find({name:codeno}, function(err, codes){
 		// codes.forEach(function(err,c){
-			 hostperson= codes[0].host;
 			 teamcreated=codeno;
             
 			var x="/"+codeno;
 			flag=1;
+
+			//adding room to userrooms
+			User.findOne({ name: hostperson}, function (err, users){
+				users.rooms.push(codeno);
+				users.save();
+			  });
+
+			  hostperson= codes[0].host;
+
 		    res.redirect(x);
 		// });
 
@@ -152,14 +165,21 @@ app.get('/room', (req, res) => {
 app.get('/:room', (req, res) => {
 	var searchcode=req.params.room;
 	var flag=0;
+    
+	var groupmess=[];
+	Code.findOne({name:req.params.room},function(err,codes){
+        groupmess=codes.messages;
+		 
+	});
+	
 
 	Code.find({name:searchcode}, function(err, codes){
 		codes.forEach(function(err,c){
 			username=req.user.name;
-			// console.log(username);
-			// var x="/"+searchcode;
+			console.log(groupmess);
+
 			flag=1;
-		    res.render('room', { roomId: req.params.room, userId: req.user.name })
+		    res.render('room', { groupmess:groupmess , roomId: req.params.room, userId: req.user.name })
 		});
 
 		if(flag===0){
@@ -168,6 +188,8 @@ app.get('/:room', (req, res) => {
 	});	
 });
 
+
+
 io.on('connection', (socket) => {
 	var mymap=new Map();
 	socket.on('join-room', (roomId, userId) => {
@@ -175,6 +197,13 @@ io.on('connection', (socket) => {
        const users = [];
         
 	   var i=0;
+
+       Code.findOne({name:roomId},function(err,codes){
+		   codes.messages.forEach(function(mess){  
+			io.to(roomId).emit('createMessage', mess,'','')
+			});  
+	   });
+
 	   Usercode.find({roomid:roomId},function(err,usercodes){
 		usercodes.forEach(function(err,c){
 			// users[i]=c.nameofuser;
@@ -194,23 +223,33 @@ io.on('connection', (socket) => {
 		});
 	
 		usercode.save();
-
+	
 		socket.on('message', (message) => {
 			var x;
+			var fullmessage;
 				
 			Usercode.find({id:userId},function(err,usercodes){
 				x=usercodes[0].nameofuser;
-				// console.log(x);
+				fullmessage= x+" : "+message;
+	
 			io.to(roomId).emit('createMessage', message, userId,x)
 			
 		});
-		})
+
+		//saving messages
+		Code.findOne({ name: roomId}, function (err, codes){
+			codes.messages.push({username:x,chat:message});
+			codes.save();
+		  });
+
+
 		socket.on('disconnect', () => {
 			socket.to(roomId).broadcast.emit('user-disconnected', userId)
 		})
 	})
 
 	// /
+})
 })
 
 const PORT = process.env.PORT || 3000
