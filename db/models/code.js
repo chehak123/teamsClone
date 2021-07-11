@@ -11,7 +11,10 @@ var codeSchema=new mongoose.Schema({
        username:{type: String},
        chat:{type:String}
        
-    }]
+    }],
+    setname:{
+        type:String
+    }
 
 });
 module.exports=mongoose.model("code",codeSchema);

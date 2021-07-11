@@ -28,6 +28,8 @@
     "passport-local-mongoose": "^6.1.0",
     "path": "^0.12.7",
     "peer": "^0.5.3",
+    "prompt-sync": "^4.2.0",
+    "randomcolor": "^0.6.2",
     "randomstring": "^1.2.1",
     "session": "^0.1.0",
     "socket.io": "^2.3.0",

@@ -4,7 +4,9 @@ const app = express();
 const path = require("path");
 const ejs = require("ejs");
 var randomstring = require("randomstring");
+const prompt = require('prompt-sync')();
 const mongoose = require("mongoose");
+var randomColor = require('randomcolor'); 
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const { ExpressPeerServer } = require('peer');
@@ -53,7 +55,8 @@ const { v4: uuidv4 } = require('uuid')
 var codeno;
 
 app.use('/peerjs', peerServer)
-app.use(express.static('public'))
+// app.use(express.static('public'))/
+app.use(express.static(path.join(__dirname, 'public'))); 
 app.set('view engine', 'ejs')
 
 var username;
@@ -76,25 +79,33 @@ var teamcreated;
 app.get("/create", function (req, res) {
 	var newroom=randomstring.generate(7);
 	var newroomurl="/"+newroom;
+	var chatroomurl="/chat/"+newroom;
     var x=req.user.username;
+	// const roomname=prompt('Room name');
 
 	const code=new Code({
 		name:newroom,
-		host:x
+		host:x,
+		// setname:roomname
 	});
 
 	hostperson= req.user.name;
 	teamcreated=newroom;
 
 	code.save();
+
+	User.findOne({ name: hostperson}, function (err, users){
+		if(users.color.length()>0){
+
+		}else{
+		users.color=randomColor();
+		users.save();
+		}
+	});
+
 	username=req.user.name;
 
-	// User.findOne({ name: hostperson}, function (err, users){
-	// 	users.rooms.push(newroom);
-	// 	users.save();
-	// });
-
-	res.render("create",{newroom:newroom, newroomurl:newroomurl, currentUser: req.user});
+	res.render("create",{ newroom:newroom, newroomurl:newroomurl, chatroomurl:chatroomurl, currentUser: req.user});
 });
 
 app.post("/create",function(req,res){
@@ -102,17 +113,28 @@ app.post("/create",function(req,res){
 	var flag=0;
 
 	Code.find({name:codeno}, function(err, codes){
-		// codes.forEach(function(err,c){
+		
 			 teamcreated=codeno;
-            
-			var x="/"+codeno;
+			var x="/chat/"+codeno;
 			flag=1;
 
 			//adding room to userrooms
 			User.findOne({ name: hostperson}, function (err, users){
+                var flg=0;
+               
+				//for unique room cards
+				users.rooms.forEach(function(room){
+                     if(room==codeno){
+						 flg=1;
+					 }
+				});
+
+                if(flg==0){
 				users.rooms.push(codeno);
 				users.save();
-			  });
+				}
+
+			});
 
 			  hostperson= codes[0].host;
 
@@ -158,8 +180,33 @@ app.post("/share", function(req,res){
 
 })
 
-app.get('/room', (req, res) => {
-	res.redirect(`/${uuidv4()}`)
+// app.get('/room', (req, res) => {
+// 	res.redirect(`/${uuidv4()}`)
+// });
+
+app.get('/chat/:room', (req,res)=>{
+    var searchcode=req.params.room;
+	var groupmess=[];
+	var roomurl="/"+searchcode;
+	Code.findOne({name:req.params.room},function(err,codes){
+        groupmess=codes.messages;
+		 
+	});
+
+	Code.find({name:searchcode}, function(err, codes){
+		codes.forEach(function(err,c){
+			username=req.user.name;
+			console.log(username);
+
+			flag=1;
+		    res.render('chat', { groupmess:groupmess , roomurl:roomurl, roomId: req.params.room, userId: req.user.name, currentUser:req.user })
+		});
+
+		if(flag===0){
+		res.render("error");
+		}
+	});	
+
 });
 
 app.get('/:room', (req, res) => {

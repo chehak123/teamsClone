@@ -125,7 +125,7 @@ navigator.mediaDevices
 		myVideoStream = stream
 		addVideoStream(myVideo, stream)
 
-		socket.on('user-connected', (userId,username,users) => {
+		socket.on('user-connected', (userId,username,users) => { 
 			
             //  users.forEach(function(err,c){
 			// 	//  console.log(users[c]);
@@ -145,7 +145,9 @@ navigator.mediaDevices
 			})
 		})
 
-		let text = $('input')
+	})
+
+	let text = $('input')
 
 		$('html').keydown(function (e) {
 			if (e.which == 13 && text.val().length !== 0) {
@@ -155,13 +157,12 @@ navigator.mediaDevices
 		})
 
 		socket.on('createMessage', (message, userId,x) => {
+			// console.log(x);
+			if(x.length >0){
 			$('ul').append(`<li >
 								<span class="messageHeader">
 									<span>
-										From 
 										<span class="messageSender">${x}</span> 
-										to 
-										<span class="messageReceiver">Everyone:</span>
 									</span>
 
 									${new Date().toLocaleString('en-US', {
@@ -174,14 +175,10 @@ navigator.mediaDevices
 								<span class="message">${message}</span>
 							
 							</li>`)
+
+								}
 			scrollToBottom()
 		})
-
-		// socket.on('user-disconnected', (userId) => {
-		// 	peers[userId].remove()
-		// })
-
-	})
 
 
 	socket.on('user-disconnected', (userId) => {

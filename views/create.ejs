@@ -127,7 +127,7 @@
              
               <div class="card-body pt-5">
                 <h5 class="card-title"><%= room %></h5>
-                <button>Enter room</button>
+                <button class="btn btn-primary" style="align-content: center;"><a href=<%=chatroomurl%>>Enter room</a></button>
                
               </div>
             </div>       
@@ -144,6 +144,9 @@
     <script>
 
       function showroominfo() {
+        // var roomname = prompt("Enter room name", "");
+        // code.
+
         document.getElementById("roominfo").style.display = "block";
       }
 
@@ -155,24 +158,6 @@
         document.execCommand("copy");
         $temp.remove();
     }
-
-    // function sendEmail() {
-		// 		Email.send({
-		// 		  Host: "smtp.gmail.com",
-		// 		  Username: "chehakagrawal01@gmail.com",
-		// 		  Password: "Enter your password",
-		// 		  To: hostperson,
-		// 		  From: req.user.username,
-		// 		  Subject: req.user.name + " wants to join your call",
-		// 		  Body: "Well that was easy!!",
-		// 		})
-		// 		  .then(function (message) {
-		// 			alert("mail sent successfully")
-		// 		  });
-
-    //       prompt("You are joining the call of " + hostperson);
-		// 	  }
-
 
     </script>
 

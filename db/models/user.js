@@ -12,6 +12,9 @@ var userSchema=new mongoose.Schema({
         type:String
         //required:true
     },
+    color:{
+        type:String
+    },
     rooms:[{
         type:String
     }]
