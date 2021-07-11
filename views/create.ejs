@@ -120,9 +120,21 @@
       <div class="row">
         <h2 style="margin-top: 15vh;">My teams</h2>
 
-        <div id="notes">
-          
-        </div>
+           <% currentUser.rooms.forEach(function(room){  %>
+          <div class="col-md-4">
+           
+            <div class="card profile-card-2" style="margin-top: 8%;">
+             
+              <div class="card-body pt-5">
+                <h5 class="card-title"><%= room %></h5>
+                <button>Enter room</button>
+               
+              </div>
+            </div>       
+            
+          </div>
+        <% }) %>
+
       </div>
     </div>
 

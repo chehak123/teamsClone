@@ -89,10 +89,10 @@ app.get("/create", function (req, res) {
 	code.save();
 	username=req.user.name;
 
-	User.findOne({ name: hostperson}, function (err, users){
-		users.rooms.push(newroom);
-		users.save();
-	});
+	// User.findOne({ name: hostperson}, function (err, users){
+	// 	users.rooms.push(newroom);
+	// 	users.save();
+	// });
 
 	res.render("create",{newroom:newroom, newroomurl:newroomurl, currentUser: req.user});
 });
