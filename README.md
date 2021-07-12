@@ -23,7 +23,6 @@ Install dependencies <br>
 Then move on and run `node app.js`,<br>
 This will start the project automatically on `localhost:3000` .<br>
 
-```
 
 ## Guide to using the Web Application
 
