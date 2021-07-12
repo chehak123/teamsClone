@@ -7,6 +7,7 @@ var randomstring = require("randomstring");
 const prompt = require('prompt-sync')();
 const mongoose = require("mongoose");
 var randomColor = require('randomcolor'); 
+var emailExistence=require('email-validator');
 const avatars = require("give-me-an-avatar");
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
@@ -151,9 +152,10 @@ app.post("/create",function(req,res){
 });
 
 app.post("/share", function(req,res){
-	console.log(hostperson);
-	console.log(teamcreated);
 	var friendmail=req.body.friendmail;
+
+	var flg=0;
+
 		var transporter = nodemailer.createTransport({
 				service: 'gmail',
 				auth: {
@@ -172,13 +174,13 @@ app.post("/share", function(req,res){
 			  
 			  transporter.sendMail(mailOptions, function(error, info){
 				if (error) {
+					res.redirect("/error");
 				  console.log(error);
 				} else {
 				  console.log('Email sent: ' + info.response);
+				  res.redirect("/share");
 				}
 			  });
-
-			  res.redirect("/share");
 
 })
 
