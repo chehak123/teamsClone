@@ -84,7 +84,6 @@ app.get("/create", function (req, res) {
 	var newroomurl="/"+newroom;
 	var chatroomurl="/chat/"+newroom;
     var x=req.user.username;
-	// const roomname=prompt('Room name');
 
 	const code=new Code({
 		name:newroom,
@@ -139,22 +138,12 @@ app.post("/create",function(req,res){
 
 			});
 
-			// if(flag==0){
-				// res.redirect("/error");
-			// }else{
                if(codes.length==0){
 				   res.redirect("/error");
 			   }else{
-
 				hostperson= codes[0].host;
 				res.redirect(x);
 			}
-
-		// });
-
-		// if(flag===0){
-		// res.redirect("/error");
-		// }
 	});
 	
 });
@@ -273,7 +262,6 @@ io.on('connection', (socket) => {
 
 		});
 
-		// socket.to(roomId).broadcast.emit('user-connected', userId,username,users)
 
 		const usercode=new Usercode({
 			nameofuser: username,

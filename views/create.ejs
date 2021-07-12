@@ -63,7 +63,6 @@
                   <h5 class="card-title text-center" style="margin-top: 10px;">Create a team</h5>
                   <br>
                   <img class="img-responsive center-block d-block mx-auto" style="width: 120px; height: auto;" src="img/iconf.png">
-                  <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
                   <br>
                   <div class="text-center">
                   <button onclick="showroominfo()" class="btn btn-primary create-team" style="align-content: center;">Create Team</button>
@@ -71,7 +70,6 @@
                 </div>
               </div>
 
-            <!-- <div class="col-lg-6 mb-4"> -->
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <img class="img-responsive center-block d-block mx-auto" style="width: 70px; height: auto;" src="img/join.png">
@@ -91,7 +89,6 @@
 
                     </div>
                   </div>
-              <!-- </div> -->
           </div>
 
           <div id="roominfo" class="row" style="margin-top: 10px; margin-left: 1px; display: none;">
@@ -104,10 +101,8 @@
               </div>
 
               <small class="form-text text-muted">Copy the code and share it to the people you want to meet with</small>
-              <!-- <button><a href="/share">Share</a></button> -->
                <br><br>
               <div class="text-center">
-              <!-- <button class="btn btn-primary create-team" style="align-content: center;"><a href=<%=newroomurl%>>Join Room</a></button> -->
               <button class="btn btn-primary create-team" style="align-content: center;"><a href="/share">Share</a></button>
             </div>
             </div>
@@ -145,9 +140,6 @@
     <script>
 
       function showroominfo() {
-        // var roomname = prompt("Enter room name", "");
-        // code.
-
         document.getElementById("roominfo").style.display = "block";
       }
 

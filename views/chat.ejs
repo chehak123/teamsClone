@@ -96,9 +96,7 @@
                 <span>
                  <div style="display: flex;">
                   <i class="fas fa-user-circle" style="font-size: 15px; color:grey; margin-right: 6px;"></i>
-                  <!-- <img src= "<%=chats.avatar %>" style="width: 20px; height: auto; margin-right: 5px;"> -->
-                  <!-- <img src='data:image/svg+xml;utf8,<%= chats.avatar %>' style="width: 20px; height: auto; margin-right: 5px;"/> -->
-                  <span class="messageSender" style="font-weight:bold; font-size: 14px;"><%= chats.username%></span> 
+                <span class="messageSender" style="font-weight:bold; font-size: 14px;"><%= chats.username%></span> 
                 </div>
                 </span>
               </span>
@@ -112,32 +110,12 @@
      <div class="mainMessageContainer"> 
        <span>
       <input id="chatMessage" type="text" placeholder="Type message here..." style="background-color: rgb(214, 214, 214); padding: 8px; width: 70vw;">
-          <!-- <button id="start-btn" onclick=startlistening() style="font-size: small">Listen</button> -->
      </span>
         </div>
     </div>
 </div>
 </body>
 <script>
-
-// function sendmeetmessage(){
-//   $('ul').append(`<li >
-// 		<span class="messageHeader">
-// 		<span>
-// 			<span class="messageSender">${""}</span> 
-// 		</span>
-
-// 		${new Date().toLocaleString('en-US', {
-// 			hour: 'numeric',
-// 			minute: 'numeric',
-// 			hour12: true,
-// 		})}
-// 	</span>
-
-// 	<span class="message">${"Meeting started. Join now"}</span>
-							
-// 	</li>`)
-// }
 
 function closechatbox() {
   document.getElementById("mainRight").style.display = "none";
