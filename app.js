@@ -139,14 +139,22 @@ app.post("/create",function(req,res){
 
 			});
 
-			  hostperson= codes[0].host;
+			// if(flag==0){
+				// res.redirect("/error");
+			// }else{
+               if(codes.length==0){
+				   res.redirect("/error");
+			   }else{
 
-		    res.redirect(x);
+				hostperson= codes[0].host;
+				res.redirect(x);
+			}
+
 		// });
 
-		if(flag===0){
-		res.redirect("/error");
-		}
+		// if(flag===0){
+		// res.redirect("/error");
+		// }
 	});
 	
 });
