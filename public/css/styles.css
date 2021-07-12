@@ -126,7 +126,7 @@ video {
 	display: flex;
 	flex-direction: column;
 	background-color: #ffffff;
-	border-left: 1px solid #2d3d42;
+	/* border-left: 1px solid #2d3d42; */
 }
 
 .mainRight button{
@@ -143,9 +143,9 @@ video {
 }
 
 .mainHeader h6 {
-	font-weight: 700;
+	font-weight:bold;
 	color: #4a4a4a;
-	font-size: 13px;
+	font-size: 15px;
 }
 
 .mainChatWindow {
@@ -153,12 +153,17 @@ video {
 	overflow-y: auto;
 }
 
+.messageSender{
+	font-weight: bold;
+	font-size: 14px;
+}
+
 .messagesContainer {
 	list-style: none;
 }
 
 .message {
-	font-size: 13px;
+	font-size: 16px;
 	display: block;
 }
 
