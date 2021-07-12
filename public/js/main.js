@@ -180,6 +180,7 @@ navigator.mediaDevices
 
 
 	socket.on('user-disconnected', (userId) => {
+		alert(username + ' disconnected', userId)
 		peers[userId].close()
 	})
 
