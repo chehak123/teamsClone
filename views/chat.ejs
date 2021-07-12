@@ -37,7 +37,7 @@
 
         <% if(currentUser){ %>
           <div style="display: flex;">
-            <a style="color: white;" href= <%= roomurl %> >
+            <a style="color: white;" href= <%= roomurl %>  >
         <div style="display: block; margin-right: 20px;"> 
           <div><i class="fas fa-video" style="font-size: 36px; margin-top: 0 !important; margin-bottom: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; color:whitesmoke;"></i></div>
          <div><p>Start meet</p></div>
@@ -83,7 +83,8 @@
     <div class="mainRight" id="mainRight" style="flex:1; margin-left: 10vw; margin-right: 10vw;">
       <div class="mainHeader">
         <div class="flex text-center" style="display:flex; margin-left: auto; margin-right: auto;">
-        <h3>Chat</h3>
+          <br><br>
+        <h3>Chat room</h3>
          </div>
       </div>
       <div class="mainChatWindow">
@@ -92,10 +93,11 @@
             <li >
               <span class="messageHeader" style="font-size: 14px;">
                 <span>
-                  <!-- From  -->
-                  <span class="messageSender"><%= chats.username%></span> 
-                  <!-- to  -->
-                  <!-- <span class="messageReceiver">Everyone:</span> -->
+                 <div style="display: flex;">
+                  <!-- <img src= "<%=chats.avatar %>" style="width: 20px; height: auto; margin-right: 5px;"> -->
+                  <!-- <img src='data:image/svg+xml;utf8,<%= chats.avatar %>' style="width: 20px; height: auto; margin-right: 5px;"/> -->
+                  <span class="messageSender" style="font-weight:bold; font-size: 18px;"><%= chats.username%></span> 
+                </div>
                 </span>
               </span>
 
@@ -115,9 +117,26 @@
 </div>
 </body>
 <script>
-// $("#chatMessage").emojioneArea({
-//     pickerPosition:"top"
-//   });
+
+// function sendmeetmessage(){
+//   $('ul').append(`<li >
+// 		<span class="messageHeader">
+// 		<span>
+// 			<span class="messageSender">${""}</span> 
+// 		</span>
+
+// 		${new Date().toLocaleString('en-US', {
+// 			hour: 'numeric',
+// 			minute: 'numeric',
+// 			hour12: true,
+// 		})}
+// 	</span>
+
+// 	<span class="message">${"Meeting started. Join now"}</span>
+							
+// 	</li>`)
+// }
+
 function closechatbox() {
   document.getElementById("mainRight").style.display = "none";
   document.getElementById("mainLeft").style.flex = "1";
@@ -138,39 +157,8 @@ function closeparticipants() {
   document.getElementById("mainLeft").style.flex = "1";
   document.getElementById("mainRight").style.display = "none";
 }
-///screen share
-// const videoElem = document.getElementById("video");
-// // const logElem = document.getElementById("log");
-// const startElem = document.getElementById("start");
-// const stopElem = document.getElementById("stop");
-// // Options for getDisplayMedia()
-// var displayMediaOptions = {
-//   video: {
-//     cursor: "always"
-//   },
-//   audio: false
-// };
-// // Set event listeners for the start and stop buttons
-// startElem.addEventListener("click", function(evt) {
-//   startCapture();
-// }, false);
-// stopElem.addEventListener("click", function(evt) {
-//   stopCapture();
-// }, false);
-// async function startCapture() {
-//   // logElem.innerHTML = "";
-//   try {
-//     videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-//     dumpOptionsInfo();
-//   } catch(err) {
-//     console.error("Error: " + err);
-//   }
-// }
-// function stopCapture(evt) {
-//   let tracks = videoElem.srcObject.getTracks();
-//   tracks.forEach(track => track.stop());
-//   videoElem.srcObject = null;
-// }
+
+
 //draggable//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 dragElement(document.getElementById("videoGrid"));
 function dragElement(elmnt) {

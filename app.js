@@ -7,6 +7,7 @@ var randomstring = require("randomstring");
 const prompt = require('prompt-sync')();
 const mongoose = require("mongoose");
 var randomColor = require('randomcolor'); 
+const avatars = require("give-me-an-avatar");
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const { ExpressPeerServer } = require('peer');
@@ -51,7 +52,8 @@ passport.deserializeUser(User.deserializeUser());
 var authRoutes = require("./routes/auth.js");
 app.use("/", authRoutes);
 
-const { v4: uuidv4 } = require('uuid')
+const { v4: uuidv4 } = require('uuid');
+const { generateFromString } = require("generate-avatar");
 var codeno;
 
 app.use('/peerjs', peerServer)
@@ -95,10 +97,10 @@ app.get("/create", function (req, res) {
 	code.save();
 
 	User.findOne({ name: hostperson}, function (err, users){
-		if(users.color.length()>0){
+		if(users.avatar){
 
 		}else{
-		users.color=randomColor();
+		users.avatar=avatars.giveMeAnAvatar();
 		users.save();
 		}
 	});
@@ -196,7 +198,7 @@ app.get('/chat/:room', (req,res)=>{
 	Code.find({name:searchcode}, function(err, codes){
 		codes.forEach(function(err,c){
 			username=req.user.name;
-			console.log(username);
+			// console.log(username);
 
 			flag=1;
 		    res.render('chat', { groupmess:groupmess , roomurl:roomurl, roomId: req.params.room, userId: req.user.name, currentUser:req.user })
@@ -223,7 +225,7 @@ app.get('/:room', (req, res) => {
 	Code.find({name:searchcode}, function(err, codes){
 		codes.forEach(function(err,c){
 			username=req.user.name;
-			console.log(groupmess);
+			// console.log(groupmess);
 
 			flag=1;
 		    res.render('room', { groupmess:groupmess , roomId: req.params.room, userId: req.user.name })
@@ -275,19 +277,19 @@ io.on('connection', (socket) => {
 			var x;
 			var fullmessage;
 				
-			Usercode.find({id:userId},function(err,usercodes){
+		Usercode.find({id:userId},function(err,usercodes){
 				x=usercodes[0].nameofuser;
 				fullmessage= x+" : "+message;
 	
+					//saving messages
+				Code.findOne({ name: roomId}, function (err, codes){
+					codes.messages.push({username:x,chat:message});
+					codes.save();
+				});
+
 			io.to(roomId).emit('createMessage', message, userId,x)
 			
 		});
-
-		//saving messages
-		Code.findOne({ name: roomId}, function (err, codes){
-			codes.messages.push({username:x,chat:message});
-			codes.save();
-		  });
 
 
 		socket.on('disconnect', () => {

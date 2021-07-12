@@ -9,8 +9,8 @@ var codeSchema=new mongoose.Schema({
     },
     messages:[{
        username:{type: String},
-       chat:{type:String}
-       
+       chat:{type:String},
+       avatar:{type:String}
     }],
     setname:{
         type:String

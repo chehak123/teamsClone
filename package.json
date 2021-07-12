@@ -18,6 +18,8 @@
     "emojionearea": "^3.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "generate-avatar": "^1.4.10",
+    "give-me-an-avatar": "^1.0.0",
     "method-override": "^3.0.0",
     "mongoose": "^5.12.14",
     "nodemailer": "^6.6.2",

@@ -159,7 +159,7 @@ navigator.mediaDevices
 		socket.on('createMessage', (message, userId,x) => {
 			// console.log(x);
 			if(x.length >0){
-			$('ul').append(`<li >
+			$('ul').append(`<li>
 								<span class="messageHeader">
 									<span>
 										<span class="messageSender">${x}</span> 
