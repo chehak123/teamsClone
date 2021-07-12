@@ -21,7 +21,7 @@ const peerServer = ExpressPeerServer(server, {
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.use(urlencodedParser);
-app.use(bodyParser.json());
+app.use(express.json());
 
 mongoose.connect("mongodb+srv://chehak:123@cluster0.ohkb1.mongodb.net/Teams" , {
 	useNewUrlParser : true, 
