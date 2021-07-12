@@ -60,38 +60,36 @@ stopElem.addEventListener("click", function(evt) {
 
 
 async function startCapture() {
-  // logElem.innerHTML = "";
+//   logElem.innerHTML = "";
 
   try {
     // videoElem.srcObject = await 
 	navigator.mediaDevices.getDisplayMedia(displayMediaOptions)
 	.then((stream)=>{
-        myVideoStream.getVideoTracks()[0].replaceTrack(stream);
-
-		// myVideoStream = stream
-		// addVideoStream(myVideo, stream)
+		myVideoStream = stream
+		addVideoStream(myVideo, stream)
         
-		// var x="screen";
-		// socket.on('user-connected', (userId,x,users) => {
-		// 	console.log(userId);
-		// 	connectToNewUser(userId, stream)
-		// 	alert('screen connected', userId)
-		// })
+		var x="screen";
+		socket.on('user-connected', (userId,x,users) => {
+			console.log(userId);
+			connectToNewUser(userId, stream)
+			alert('screen connected', userId)
+		})
 
-		// peer.on('call', (call) => {
-		// 	call.answer(stream)
-		// 	const video = document.createElement('video')
-		// 	call.on('stream', (userVideoStream) => {
-		// 		addVideoStream(video, userVideoStream)
-		// 	})
-		// })
+		peer.on('call', (call) => {
+			call.answer(stream)
+			const video = document.createElement('video')
+			call.on('stream', (userVideoStream) => {
+				addVideoStream(video, userVideoStream)
+			})
+		})
 
-        // var name="screen";
-		// socket.on('user-connected', (userId,name,users) => {
-		// 	// usern=username;
-		// 	connectToNewUser(userId, stream)
-		// 	alert(username + ' connected', userId)
-		// });
+    //     var name="screen";
+	// 	socket.on('user-connected', (userId,name,users) => {
+	// 		// usern=username;
+	// 		connectToNewUser(userId, stream)
+	// 		alert(username + ' connected', userId)
+	// 	});
 	});
 
     dumpOptionsInfo();

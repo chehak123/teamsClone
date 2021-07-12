@@ -31,10 +31,11 @@
   
   <body style="background-color: whitesmoke;">
 
-    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #4e5d94 !important;">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/" style="color: white;"> Microsoft Teams
-            <!-- <img src="https://helphub.wmich.edu/hc///360087725571/microsoft-teams-logo.png" width="200" background= "white" text-indent= "-99999px" style="margin-left: 3%;"> -->
+    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #5a699c !important;">
+        <div class="container-fluid" >
+          <a class="navbar-brand" href="/" style="color: white;">
+            <img src="https://www.pexip.com/hubfs/Microsoft%20Teams-3.png" style="width: 60px;">
+            Microsoft Teams
           </a>
 
             <% if(currentUser){ %>
@@ -127,7 +128,7 @@
              
               <div class="card-body pt-5">
                 <h5 class="card-title"><%= room %></h5>
-                <button class="btn btn-primary" style="align-content: center;"><a href=<%=chatroomurl%>>Enter room</a></button>
+                <button class="btn btn-primary" style="align-content: center;"><a href="/chat/<%= room %>" style="color: white; text-decoration: none;">Enter room</a></button>
                
               </div>
             </div>       
