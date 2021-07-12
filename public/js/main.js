@@ -10,7 +10,7 @@
 const socket = io('/')
 const videoGrid = document.getElementById('videoGrid')
 const myVideo = document.createElement('video')
-// const leave= document.getElementById("leave");
+const leave= document.getElementById("leave");
 // const Participants_list=document.getElementById('Participants_list')
 
 myVideo.muted = true
