@@ -21,18 +21,18 @@ https://teamsclone-app.herokuapp.com/
 After cloning the repo, run `npm install` in the terminal. <br>
 Install dependencies <br>
 Then move on and run `node app.js`,<br>
-This will start the project automatically on `localhost:3000` .<br>
+This will start the project automatically on `localhost:5000` .<br>
 
 
 ## Guide to using the Web Application
 
-Now comes the most exciting part of the project. Understanding and making use of the actual Web Application. So let's get started. 🥳 👽
+1. Register as a new user on main page.
 
-1. Start off by visiting the hosted application. 👻
+2. To create a new team, click on create team button to get the unique code for your team. To invite others to the teams, click on share button and enter the email id of the people with whom you want to share code.
 
-2. Open the application on your personal browser and you should have it ready to use.
+3. User can join an existing team using a code as well by entering code in input box and then clicking on join team button.
 
-3. As every typical Web Application, we made sure you get the most exciting User Experience working on the application ......🧓
+4. After joining, the user would be redirected to chat page of teams. By clicking on start meet button they can join meet.
 
 
 ## ❤️ Thanks
