@@ -62,14 +62,7 @@ app.use('/peerjs', peerServer)
 app.use(express.static(path.join(__dirname, 'public'))); 
 app.set('view engine', 'ejs')
 
-
-//declarations 
 var username;
-var hostperson;
-var teamcreated;
-
-
-//routes
 
 app.get("/", function (req, res) {
 	res.render("index");
@@ -83,7 +76,9 @@ app.get("/share", function (req, res) {
 	res.render("share",{currentUser: req.user});
 });
 
-//create page (user creating a new team)
+var hostperson;
+var teamcreated;
+
 app.get("/create", function (req, res) {
 	var newroom=randomstring.generate(7);
 	var newroomurl="/"+newroom;
@@ -115,8 +110,6 @@ app.get("/create", function (req, res) {
 	res.render("create",{ newroom:newroom, newroomurl:newroomurl, chatroomurl:chatroomurl, currentUser: req.user});
 });
 
-
-//create page (user joining through a code)
 app.post("/create",function(req,res){
 	codeno= req.body.givencode;
 	var flag=0;
@@ -155,8 +148,6 @@ app.post("/create",function(req,res){
 	
 });
 
-
-//share page
 app.post("/share", function(req,res){
 	var friendmail=req.body.friendmail;
 
@@ -194,9 +185,6 @@ app.post("/share", function(req,res){
 // 	res.redirect(`/${uuidv4()}`)
 // });
 
-
-
-//rendering chat room
 app.get('/chat/:room', (req,res)=>{
     var searchcode=req.params.room;
 	var groupmess=[];
@@ -222,8 +210,6 @@ app.get('/chat/:room', (req,res)=>{
 
 });
 
-
-//rendering video chat room
 app.get('/:room', (req, res) => {
 	var searchcode=req.params.room;
 	var flag=0;
@@ -252,7 +238,6 @@ app.get('/:room', (req, res) => {
 
 
 
-//socket.io connection
 io.on('connection', (socket) => {
 	var mymap=new Map();
 	socket.on('join-room', (roomId, userId) => {
