@@ -200,11 +200,8 @@ app.post("/share", function(req,res){
 app.get('/chat/:room', (req,res)=>{
     var searchcode=req.params.room;
 	var groupmess=[];
-	var flag=0;
 	var roomurl="/"+searchcode;
-
 	Code.findOne({name:req.params.room},function(err,codes){
-		console.log(codes);
         groupmess=codes.messages;
 		 
 	});
