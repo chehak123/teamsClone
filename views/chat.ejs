@@ -44,7 +44,6 @@
          <div><p>Start meet</p></div>
         </div> 
       </a>
-
           <div style="display: block;">
           <i class="fas fa-user-circle" style="font-size: 36px; margin-top: 0 !important; margin-bottom: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; color:whitesmoke;"></i>
           <h6 id="person_name" style="color: white;"><%=currentUser.name%></h6>
@@ -100,7 +99,6 @@
                 </div>
                 </span>
               </span>
-
               <span style="font-size: 17px;" class="message"><%=chats.chat %></span>
             
             </li>   
@@ -116,7 +114,6 @@
 </div>
 </body>
 <script>
-
 function closechatbox() {
   document.getElementById("mainRight").style.display = "none";
   document.getElementById("mainLeft").style.flex = "1";
@@ -137,8 +134,6 @@ function closeparticipants() {
   document.getElementById("mainLeft").style.flex = "1";
   document.getElementById("mainRight").style.display = "none";
 }
-
-
 //draggable//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 dragElement(document.getElementById("videoGrid"));
 function dragElement(elmnt) {

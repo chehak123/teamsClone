@@ -1,4 +1,3 @@
-
 // /** @type {RTCConfiguration} */
 // const config = { // eslint-disable-line no-unused-vars
 // 	'iceServers': [{
@@ -162,14 +161,12 @@ navigator.mediaDevices
 									<span>
 										<span class="messageSender">${x}</span> 
 									</span>
-
 									${new Date().toLocaleString('en-US', {
 										hour: 'numeric',
 										minute: 'numeric',
 										hour12: true,
 									})}
 								</span>
-
 								<span class="message">${message}</span>
 							
 							</li>`)
@@ -275,4 +272,3 @@ const setPlayVideo = () => {
 	`
 	document.querySelector('.mainVideoButton').innerHTML = html
 }
-
