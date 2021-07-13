@@ -15,7 +15,8 @@ https://teamsclone-app.herokuapp.com/
 | &nbsp;   | &nbsp;    | Socket.io  |
 | &nbsp;   | &nbsp;    | PeerJS     |
 
-##Features added
+## Features added
+
 1. More than 2 users video and voice conversation 
 2. Screen present feature
 3. Copy room code button
