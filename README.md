@@ -27,9 +27,9 @@ https://teamsclone-app.herokuapp.com/
 8. Invite friends through mail notification
 9. Speech to text conversion in textbox
 10. Unique code generator for different teams
-11. ADAPT FEATURE - Chat room - View and send messages
-                    Continue the conversation after the meeting
-                    Start the conversation before meeting
+11. ADAPT FEATURE - Chat room - View and send messages<br>
+                    Continue the conversation after the meeting<br>
+                    Start the conversation before meeting<br>
 
 
 ## How to run ? 🛴
