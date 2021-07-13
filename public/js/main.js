@@ -184,9 +184,9 @@ navigator.mediaDevices
 		peers[userId].close()
 	})
 
-	const leave = () => {
-			myVideoStream.getVideoTracks()[0].enabled = false;
-		}
+	// const leave = () => {
+	// 		myVideoStream.getVideoTracks()[0].enabled = false;
+	// 	}
 
 peer.on('open', (id) => {
 	socket.emit('join-room', ROOM_ID, id)
