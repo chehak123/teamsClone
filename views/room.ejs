@@ -102,16 +102,19 @@
             <li >
               <span class="messageHeader">
                 <span>
+                  <!-- From  -->
                   <span class="messageSender"><%= skill.username%></span> 
+                  <!-- to  -->
+                  <!-- <span class="messageReceiver">Everyone:</span> -->
                 </span>
               </span>
-
               <span class="message"><%=skill.chat %></span>
             
             </li>   
             <%}) %>     
         </ul>
      </div>
+     <!-- <div class="messageSendingTo">To: <span>Everyone <i class="fas fa-angle-down"></i></span> </div> -->
      <div class="mainMessageContainer"> 
        <span>
       <input id="chatMessage" type="text" placeholder="Type message here..." style="background-color:whitesmoke; padding: 8px;">
@@ -133,7 +136,9 @@
 </div>
 </body>
 <script>
-
+// $("#chatMessage").emojioneArea({
+//     pickerPosition:"top"
+//   });
 function closechatbox() {
   document.getElementById("mainRight").style.display = "none";
   document.getElementById("mainLeft").style.flex = "1";
@@ -154,10 +159,39 @@ function closeparticipants() {
   document.getElementById("mainLeft").style.flex = "1";
   document.getElementById("mainRight").style.display = "none";
 }
-
-
-
-
+///screen share
+// const videoElem = document.getElementById("video");
+// // const logElem = document.getElementById("log");
+// const startElem = document.getElementById("start");
+// const stopElem = document.getElementById("stop");
+// // Options for getDisplayMedia()
+// var displayMediaOptions = {
+//   video: {
+//     cursor: "always"
+//   },
+//   audio: false
+// };
+// // Set event listeners for the start and stop buttons
+// startElem.addEventListener("click", function(evt) {
+//   startCapture();
+// }, false);
+// stopElem.addEventListener("click", function(evt) {
+//   stopCapture();
+// }, false);
+// async function startCapture() {
+//   // logElem.innerHTML = "";
+//   try {
+//     videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+//     dumpOptionsInfo();
+//   } catch(err) {
+//     console.error("Error: " + err);
+//   }
+// }
+// function stopCapture(evt) {
+//   let tracks = videoElem.srcObject.getTracks();
+//   tracks.forEach(track => track.stop());
+//   videoElem.srcObject = null;
+// }
 //draggable//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 dragElement(document.getElementById("videoGrid"));
 function dragElement(elmnt) {
@@ -197,10 +231,6 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
-
-
-
-
 //speech to text//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var speechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition
 var recognition=new speechRecognition()
@@ -239,8 +269,7 @@ $("#start-btn").click(function(event){
     }
     recognition.start()
 })
-
-
+//emoji
 </script>
 
 <script src="js/main.js"></script>
