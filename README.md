@@ -15,10 +15,25 @@ https://teamsclone-app.herokuapp.com/
 | &nbsp;   | &nbsp;    | Socket.io  |
 | &nbsp;   | &nbsp;    | PeerJS     |
 
+##Features added
+1. More than 2 users video and voice conversation 
+2. Screen present feature
+3. Copy room code button
+4. Audio on/off
+5. Video on/off
+6. Leave meeting
+7. User signup/Login using passport.js authentication
+8. Invite friends through mail notification
+9. Speech to text conversion in textbox
+10. Unique code generator for different teams
+11. ADAPT FEATURE - Chat room - View and send messages
+                    Continue the conversation after the meeting
+                    Start the conversation before meeting
+
 
 ## How to run ? 🛴
 
-After cloning the repo, run `npm install` in the terminal. <br>
+After cloning the repo, run `npm install` in the folder directory in terminal. <br>
 Install dependencies <br>
 Then move on and run `node app.js`,<br>
 This will start the project automatically on `localhost:5000` .<br>
