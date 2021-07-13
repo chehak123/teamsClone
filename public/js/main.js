@@ -1,12 +1,4 @@
 
-// /** @type {RTCConfiguration} */
-// const config = { // eslint-disable-line no-unused-vars
-// 	'iceServers': [{
-// 	  'urls': ['stun:stun.l.google.com:19302']
-// 	}]
-//   };
-
-
 const socket = io('/')
 const videoGrid = document.getElementById('videoGrid')
 const myVideo = document.createElement('video')
@@ -24,16 +16,6 @@ const myPeer = new Peer(undefined, {
 })
 
 var usern;
-
-// const iceServers = {
-// 	iceServers: [
-// 	  { urls: 'stun:stun.l.google.com:19302' },
-// 	  { urls: 'stun:stun1.l.google.com:19302' },
-// 	  { urls: 'stun:stun2.l.google.com:19302' },
-// 	  { urls: 'stun:stun3.l.google.com:19302' },
-// 	  { urls: 'stun:stun4.l.google.com:19302' },
-// 	],
-//   }
 
 ///screenshare/////////////////////////////////////////////////////////////////////////////
 const videoElem = document.getElementById("video");
@@ -113,6 +95,7 @@ function stopCapture(evt) {
 //screenshare ends//////////////////////////////////////////////////////////////////
 
 
+// socket.io connection
 const peers = {}
 navigator.mediaDevices
 	.getUserMedia({
@@ -158,23 +141,23 @@ navigator.mediaDevices
 			// console.log(x);
 			if(x.length >0){
 			$('ul').append(`<li>
-								<span class="messageHeader">
-									<span>
-										<span class="messageSender">${x}</span> 
-									</span>
+				<span class="messageHeader">
+					<span>
+					<span class="messageSender">${x}</span> 
+				</span>
 
-									${new Date().toLocaleString('en-US', {
-										hour: 'numeric',
-										minute: 'numeric',
-										hour12: true,
-									})}
-								</span>
+				${new Date().toLocaleString('en-US', {
+					hour: 'numeric',
+					minute: 'numeric',
+					hour12: true,
+				})}
+			</span>
 
-								<span class="message">${message}</span>
+			<span class="message">${message}</span>
 							
-							</li>`)
+		    </li>`)
 
-								}
+		}
 			scrollToBottom()
 		})
 

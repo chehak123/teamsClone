@@ -29,6 +29,7 @@
 </head>
 <body>
 
+  <!-- navbar -->
   <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #5a699c !important;">
     <div class="container-fluid">
       <a class="navbar-brand" href="/create" style="color: white;"> 
@@ -139,6 +140,7 @@ function closeparticipants() {
 }
 
 
+
 //draggable//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 dragElement(document.getElementById("videoGrid"));
 function dragElement(elmnt) {
@@ -178,6 +180,10 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
+
+
+
+
 //speech to text//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var speechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition
 var recognition=new speechRecognition()
@@ -216,7 +222,7 @@ $("#start-btn").click(function(event){
     }
     recognition.start()
 })
-//emoji
+
 </script>
 
 <script src="../js/main.js"></script>
