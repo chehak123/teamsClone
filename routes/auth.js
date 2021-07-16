@@ -43,6 +43,8 @@ router.post(
   }),
   function (req, res) {}
 );
+
+
 //LOGOUT
 router.get("/logout", function (req, res) {
   req.logout();

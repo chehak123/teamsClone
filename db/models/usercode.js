@@ -1,3 +1,5 @@
+//usercode schema matching peerjs id with username
+
 var mongoose=require("mongoose");
 
 var usercodeSchema=new mongoose.Schema({

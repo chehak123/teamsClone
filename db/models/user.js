@@ -1,3 +1,5 @@
+//user schema
+
 var mongoose=require("mongoose"),
 	passportLocal=require("passport-local-mongoose");
 var userSchema=new mongoose.Schema({

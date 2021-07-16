@@ -97,6 +97,8 @@ async function startCapture() {
   }
 }
 
+
+//when user disconnects, stop its video capture
 function stopCapture(evt) {
   let tracks = videoElem.srcObject.getTracks();
 
@@ -144,6 +146,8 @@ navigator.mediaDevices
 
 	})
 
+	//chat box functionality
+
 	let text = $('input')
 
 		$('html').keydown(function (e) {
@@ -176,6 +180,8 @@ navigator.mediaDevices
 		})
 
 
+		//when user disconnects, remove his video
+
 	socket.on('user-disconnected', (userId) => {
 		alert(username + ' disconnected', userId)
 		peers[userId].close()
@@ -189,6 +195,8 @@ peer.on('open', (id) => {
 	socket.emit('join-room', ROOM_ID, id)
 })
 
+
+//whennew user connects, create a new video element
 const connectToNewUser = (userId, stream) => {
 	const call = peer.call(userId, stream)
 	const video = document.createElement('video')
@@ -202,6 +210,8 @@ const connectToNewUser = (userId, stream) => {
 	peers[userId] = call
 }
 
+
+//add that video streamof new user to existing stream
 const addVideoStream = (video, stream) => {
 	video.srcObject = stream
 	video.addEventListener('loadedmetadata', () => {
@@ -213,11 +223,15 @@ const addVideoStream = (video, stream) => {
 	// }
 }
 
+
+//automatically scroll at bottom of chat box
 const scrollToBottom = () => {
 	var d = $('.mainChatWindow')
 	d.scrollTop(d.prop('scrollHeight'))
 }
 
+
+//mic on/off functionality
 const muteUnmute = () => {
 	const enabled = myVideoStream.getAudioTracks()[0].enabled
 	if (enabled) {
@@ -229,6 +243,8 @@ const muteUnmute = () => {
 	}
 }
 
+
+//set unmute mic icon on mic on
 const setMuteButton = () => {
 	const html = `
 	  <i class="fas fa-microphone"></i>
@@ -237,6 +253,7 @@ const setMuteButton = () => {
 	document.querySelector('.mainMuteButton').innerHTML = html
 }
 
+//set mute mic icon on mic off
 const setUnmuteButton = () => {
 	const html = `
 	  <i class="unmute fas fa-microphone-slash"></i>
@@ -245,6 +262,8 @@ const setUnmuteButton = () => {
 	document.querySelector('.mainMuteButton').innerHTML = html
 }
 
+
+///video on/off functionality
 const playStop = () => {
 	// console.log('object')
 	let enabled = myVideoStream.getVideoTracks()[0].enabled
@@ -257,6 +276,7 @@ const playStop = () => {
 	}
 }
 
+//set video on icon on video on
 const setStopVideo = () => {
 	const html = `
 	  <i class="fas fa-video"></i>
@@ -265,6 +285,7 @@ const setStopVideo = () => {
 	document.querySelector('.mainVideoButton').innerHTML = html
 }
 
+//set video off icon on video off
 const setPlayVideo = () => {
 	const html = `
 	<i class="stop fas fa-video-slash"></i>

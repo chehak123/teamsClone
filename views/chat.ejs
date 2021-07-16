@@ -29,6 +29,8 @@
 </head>
 <body>
 
+  <!-- navbar -->
+
   <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #5a699c !important;">
     <div class="container-fluid">
       <a class="navbar-brand" href="/create" style="color: white;"> 
@@ -58,25 +60,19 @@
 </nav>
 <br><br><br>
 
+<!-- //chat main page  -->
   <div class="main">
     <div class="mainLeft" id="mainLeft" style="flex: 0; width: 0px;">
       <div class="mainVideos">
-        
       <div class="mainControls">
-
         <div class="mainControlsBlock">
-        
          <button>
-        </button>
-
+         </button>
         <button id="start" >
         </button>
-
         <button id="stop">
         </button>
-
       </div>
-
     </div>
     </div>
     </div>
@@ -89,6 +85,8 @@
       </div>
       <div class="mainChatWindow" style="flex-grow:0.7;">
         <ul class="messagesContainer">
+
+          <!-- shows all messages of the group   -->
           <% groupmess.forEach(function(chats){%>
             <li style="background-color: #e0eaf3; border-radius: 5px; padding: 1px 15px 3px 15px; margin-bottom: 7px; width: fit-content;" >
               <span class="messageHeader" style="font-size: 13px;">
@@ -102,11 +100,18 @@
               <span style="font-size: 17px;" class="message"><%=chats.chat %></span>
             
             </li>   
-            <%}) %>     
+            <%}) %>  
+            
+            <!--  -->
+
+
         </ul>
      </div>
      <div class="mainMessageContainer"> 
        <span>
+
+        <!-- chat page input box -->
+        
       <input id="chatMessage" type="text" placeholder="Type message here..." style="background-color: rgb(214, 214, 214); padding: 8px; width: 70vw;">
      </span>
         </div>
@@ -134,7 +139,11 @@ function closeparticipants() {
   document.getElementById("mainLeft").style.flex = "1";
   document.getElementById("mainRight").style.display = "none";
 }
-//draggable//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//draggable
+
+
 dragElement(document.getElementById("videoGrid"));
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -173,7 +182,15 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
-//speech to text//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+//speech to text
+
+
 var speechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition
 var recognition=new speechRecognition()
 var textbox=$("#chatMessage")
@@ -211,7 +228,8 @@ $("#start-btn").click(function(event){
     }
     recognition.start()
 })
-//emoji
+
+
 </script>
 
 <script src="../js/main.js"></script>

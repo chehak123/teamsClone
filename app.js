@@ -28,6 +28,7 @@ mongoose.connect("mongodb+srv://chehak:123@cluster0.ohkb1.mongodb.net/Teams" , {
 	useUnifiedTopology: true 
 });
 
+
 var Code = require("./db/models/code");
 var User = require("./db/models/user");
 var Usercode = require("./db/models/usercode");
@@ -64,6 +65,8 @@ app.set('view engine', 'ejs')
 
 var username;
 
+//rendering paths
+
 app.get("/", function (req, res) {
 	res.render("index");
 });
@@ -80,18 +83,28 @@ var hostperson;
 var teamcreated;
 
 app.get("/create", function (req, res) {
+	//new room code
 	var newroom=randomstring.generate(7);
+	
+	//url for new code generated
 	var newroomurl="/"+newroom;
+
+	//url for chat room of that room code
 	var chatroomurl="/chat/"+newroom;
+
+	//signed in user
     var x=req.user.username;
 
+    //saved in db
 	const code=new Code({
 		name:newroom,
 		host:x,
 		// setname:roomname
 	});
 
+	//hostperson is the one who has signed in
 	hostperson= req.user.name;
+
 	teamcreated=newroom;
 
 	code.save();
@@ -111,9 +124,11 @@ app.get("/create", function (req, res) {
 });
 
 app.post("/create",function(req,res){
+	//codeno saves the room-code that user wants to join
 	codeno= req.body.givencode;
 	var flag=0;
 
+	//searching in db
 	Code.find({name:codeno}, function(err, codes){
 		
 			 teamcreated=codeno;
@@ -153,6 +168,8 @@ app.post("/share", function(req,res){
 
 	var flg=0;
 
+
+	  ///mail notification to friends
 		var transporter = nodemailer.createTransport({
 				service: 'gmail',
 				auth: {
@@ -194,6 +211,7 @@ app.get('/chat/:room', (req,res)=>{
 		 
 	});
 
+	//search the room-code user joined in db and send messages to chat page 
 	Code.find({name:searchcode}, function(err, codes){
 		codes.forEach(function(err,c){
 			username=req.user.name;
@@ -210,6 +228,8 @@ app.get('/chat/:room', (req,res)=>{
 
 });
 
+
+
 app.get('/:room', (req, res) => {
 	var searchcode=req.params.room;
 	var flag=0;
@@ -219,8 +239,8 @@ app.get('/:room', (req, res) => {
         groupmess=codes.messages;
 		 
 	});
-	
 
+	////search the room-code user joined in db and send messages to room page 
 	Code.find({name:searchcode}, function(err, codes){
 		codes.forEach(function(err,c){
 			username=req.user.name;
@@ -237,7 +257,7 @@ app.get('/:room', (req, res) => {
 });
 
 
-
+//socket.io connection
 io.on('connection', (socket) => {
 	var mymap=new Map();
 	socket.on('join-room', (roomId, userId) => {
