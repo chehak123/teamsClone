@@ -23,11 +23,12 @@ https://teamsclone-app.herokuapp.com/
 4. Audio on/off
 5. Video on/off
 6. Leave meeting
-7. User signup/Login using passport.js authentication
-8. Invite friends through mail notification
-9. Speech to text conversion in textbox
-10. Unique code generator for different teams
-11. ADAPT FEATURE - Chat room - View and send messages<br>
+7. Used NPM library ‘speech-to-text’ for faster chat conversations
+8. User signup/Login using passport.js authentication
+9. Invite friends through mail notification
+10. Speech to text conversion in textbox
+11. Unique code generator for different teams
+12. ADAPT FEATURE - Chat room - View and send messages<br>
                     Continue the conversation after the meeting<br>
                     Start the conversation before meeting<br>
 
